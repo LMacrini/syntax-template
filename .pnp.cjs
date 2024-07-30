@@ -18,6 +18,10 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:builder"\
     },\
     {\
+      "name": "http-server-with-cloudflare-tunnel",\
+      "reference": "workspace:server"\
+    },\
+    {\
       "name": "simple-collection",\
       "reference": "workspace:src/SimpleCollection"\
     },\
@@ -30,6 +34,7 @@ const RAW_RUNTIME_STATE =
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
     ["builder", ["workspace:builder"]],\
+    ["http-server-with-cloudflare-tunnel", ["workspace:server"]],\
     ["simple-collection", ["workspace:src/SimpleCollection"]],\
     ["tutorial", ["workspace:tutorial"]],\
     ["website-components-template", ["workspace:."]]\
@@ -10306,6 +10311,17 @@ const RAW_RUNTIME_STATE =
           ["url-join", "npm:4.0.1"]\
         ],\
         "linkType": "HARD"\
+      }]\
+    ]],\
+    ["http-server-with-cloudflare-tunnel", [\
+      ["workspace:server", {\
+        "packageLocation": "./server/",\
+        "packageDependencies": [\
+          ["http-server-with-cloudflare-tunnel", "workspace:server"],\
+          ["dotenv", "npm:10.0.0"],\
+          ["http-server", "npm:14.1.1"]\
+        ],\
+        "linkType": "SOFT"\
       }]\
     ]],\
     ["https-proxy-agent", [\

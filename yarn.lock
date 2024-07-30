@@ -7005,6 +7005,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"http-server-with-cloudflare-tunnel@workspace:server":
+  version: 0.0.0-use.local
+  resolution: "http-server-with-cloudflare-tunnel@workspace:server"
+  dependencies:
+    dotenv: "npm:^10.0.0"
+    http-server: "npm:^14.1.1"
+  languageName: unknown
+  linkType: soft
+
 "http-server@npm:^14.1.1":
   version: 14.1.1
   resolution: "http-server@npm:14.1.1"
