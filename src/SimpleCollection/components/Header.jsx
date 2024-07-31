@@ -59,7 +59,7 @@ export default (props) => {
             <Logomark className="h-9 w-9 lg:hidden" />
             <Logo className="hidden h-9 w-auto fill-slate-700 lg:block dark:fill-sky-100" />
           </Link> */}
-          <svg aria-hidden="true" viewBox="0 0 400 50" fill="none" >
+          <svg aria-hidden="true" viewBox="0 0 703 112" fill="none" >
 
             {dividedContent[0].map(element => {
             const text = element.content[0].text.trim().split('\n');
