@@ -10,7 +10,10 @@ function GitHubIcon(props) {
   }
 
 export default (props) => {
-    console.log(props)
+    if (props === undefined) {
+      return null;
+    }
+    console.log("THESE ARE THE PROPS FOR THE HEADER", props)
     let [isScrolled, setIsScrolled] = useState(false)
   
     useEffect(() => {
@@ -63,7 +66,7 @@ export default (props) => {
 
             {dividedContent[0].map(element => {
             const text = element.content[0].text.trim().split('\n');
-            console.log("text and text length: ", text, text.length)
+            // console.log("text and text length: ", text, text.length)
             if (text.length === 1) {
               return <path d={text[0]} />; 
             } else {
