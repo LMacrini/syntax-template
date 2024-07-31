@@ -7,7 +7,7 @@ function GitHubIcon(props) {
       </svg>
     )
   }
-  
+
 export default (props) => {
     console.log(props)
     let [isScrolled, setIsScrolled] = useState(false)
