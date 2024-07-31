@@ -64,7 +64,7 @@ export default (props) => {
             {dividedContent[0].map(element => {
             const text = element.content[0].text.split('\n');
             if (text.length === 0) {
-              return `<path d={text[0]} />` 
+              return <path d={text[0]} />; 
             } else {
               const parseAttributes = (attrString) => {
                 const attributes = {};
