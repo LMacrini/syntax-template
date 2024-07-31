@@ -59,6 +59,30 @@ export default (props) => {
             <Logomark className="h-9 w-9 lg:hidden" />
             <Logo className="hidden h-9 w-auto fill-slate-700 lg:block dark:fill-sky-100" />
           </Link> */}
+          <svg aria-hidden="true" viewBox="0 0 227 36" fill="none" >
+
+            {dividedContent[0].map(element => {
+            const text = element.content[0].text.split('\n');
+            if (text.length === 0) {
+              return `<path d={text[0]} />` 
+            } else {
+              const parseAttributes = (attrString) => {
+                const attributes = {};
+                attrString.split(' ').forEach(attr => {
+                  const [key, value] = attr.split('=');
+                  if (key && value) {
+                    attributes[key] = value.replace(/"/g, '');
+                  }
+                });
+                return attributes;
+              };
+              
+              const attributes = parseAttributes(text[0]);
+
+              return <g {...attributes}>{text.slice(1).map(path => <path d={path} />)}</g>;
+            }
+          })}
+        </svg>
         </div>
         <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
           {/* <Search /> */}
