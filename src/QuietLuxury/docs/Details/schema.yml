@@ -1,0 +1,45 @@
+title: 
+  en: Details
+  fr: Détails
+description: 
+  en: Explain things or answer questions using collapsable blocks of text. Commonly known as an "accordion" section.
+  fr: Expliquer des choses ou répondre à des questions à l'aide de blocs de texte rétractables. Communément appelée section "accordéon".
+label:
+  en: Details - Accordion
+  fr: Détails - Accordéon
+assets:
+  left_align.png:
+    title: 
+      en: FAQ content aligned left.
+      fr: FAQ contenu aligné à gauche.
+  center_align.png:
+    title: 
+      en: FAQ content aligned center.
+      fr: FAQ contenu aligné au centre.
+  right_align.png:
+    title: 
+      en: FAQ content aligned right.
+      fr: FAQ contenu aligné à droite.
+  Details-Left.png:
+    title: 
+      en: A section with grouped headers and body text with the title aligned to the left.
+      fr: Une section avec des en-têtes et un corps de texte groupés, le titre étant aligné à gauche.
+  Details-Right.png:
+    title: 
+      en: A section with grouped headers and body text with the title aligned to the right.
+      fr: Une section avec des en-têtes et un corps de texte groupés, le titre étant aligné à droite.
+  Details-Centre.png:
+    title: 
+      en: A section with headers and collapsable body text.
+      fr: Une section avec des en-têtes et un corps de texte réductible.
+
+elements:
+  title:
+    alignment: 'left,right,center'
+  subtitle:
+
+items:
+  separator: divider
+  elements:
+    title:
+    text:

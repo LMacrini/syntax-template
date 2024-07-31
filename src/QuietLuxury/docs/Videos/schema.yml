@@ -1,0 +1,57 @@
+title: 
+  en: Videos - Dynamic
+  fr: Vidéos - Dynamique
+description:
+  en: A component takes input of videos and displays them in a list or grid.
+  fr: Un composant prend en entrée des vidéos et les affiche dans une liste ou une grille.
+label:
+  en: Videos - Dynamic
+  fr: Vidéos - Dynamique
+assets:
+  Screenshot_grid.png:
+    title: 
+      en: Showing videos in a grid layout.
+      fr: Affichage des vidéos dans une mise en page en grille.
+  Screenshot_list.png:
+    title: 
+      en: Showing videos in a list layout.
+      fr: Affichage des vidéos dans une mise en page en liste.
+  Screenshot_list_panel.png:
+    title: 
+      en: Showing videos in a list layout in side panel.
+      fr: Affichage des vidéos dans une mise en page en liste dans un panneau latéral.
+input:
+  type: video
+  limit: false
+
+elements:
+  title:
+
+properties:
+  layout:
+    label: 
+      en: Layout
+      fr: Mise en page
+    type: string
+    default: list
+    enum:
+      - label: 
+          en: List
+          fr: Liste
+        value: list
+      - label: 
+          en: Grid
+          fr: Grille
+        value: grid
+    description: 
+      en: The layout of the section.
+      fr: La mise en page de la section.
+  is_panel:
+    label: 
+      en: Panel Mode
+      fr: Mode panneau
+    type: boolean
+    default: false
+    description: 
+      en: Click yes in case the list is to be displayed in a side panel.
+      fr: Cliquez sur oui si la liste doit être affichée dans un panneau latéral.

@@ -1,0 +1,42 @@
+title: 
+  en: Newsletter Subscription
+  fr: Abonnement à la lettre d'information
+description: 
+  en: A section to allow you to remain in contact with your visitors by letting them sign up to recieve updates when you post new content.
+  fr: Une section qui vous permet de rester en contact avec vos visiteurs en leur permettant de s'inscrire pour recevoir des mises à jour lorsque vous publiez du nouveau contenu.
+label:
+  en: Newsletter
+  fr: Newsletter
+assets:
+  # Newsletter-Light.png:
+  #   title: 
+  #     en: Newsletter sign up form in light mode.
+  #     fr: Formulaire d'inscription à la lettre d'information en mode léger.
+  Screenshot.png:
+    title: 
+      en: Compact newsletter sign up form without body text in dark mode.
+      fr: Formulaire compact d'inscription à la newsletter sans corps de texte en mode foncé.
+
+elements:
+  title:
+  subtitle:
+  text:
+  # media:
+  #   type: image
+
+# properties:
+#   image_align:
+#     label: 
+#       en: Image Alignment
+#       fr: Alignement de l'image
+#     type: string
+#     default: left
+#     enum:
+#       - label: 
+#           en: Left
+#           fr: Gauche
+#         value: left
+#       - label: 
+#           en: Right
+#           fr: Droite
+#         value: right

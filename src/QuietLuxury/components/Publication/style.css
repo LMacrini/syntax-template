@@ -1,0 +1,29 @@
+
+.csl-entry {
+    margin-bottom: 24px !important;
+}
+
+@media (max-width: 1024px) {
+    .csl-entry {
+        margin-bottom: 20px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .csl-entry {
+        margin-bottom: 16px !important;
+    }
+}
+
+@media (max-width: 0px) {
+    .csl-entry {
+        margin-bottom: 12px !important;
+    }
+}
+
+
+
+
+
+
+

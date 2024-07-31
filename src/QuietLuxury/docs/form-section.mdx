@@ -1,0 +1,48 @@
+---
+sidebar_position: 7
+---
+
+import { Gallery, SchemaViewer } from '@site/src/components/index.js';
+
+# Form Section
+
+This section is a form that allows users to submit either a contact form or a newsletter form.
+
+## Form Section Settings
+
+### Form type:
+
+-   Either `newsletter` or `contact`
+
+# Newsletter Form
+
+## Preview
+
+<Gallery images={['form-newsletter.png']} />
+
+## Main element
+
+### Accepted elements in the header
+
+-   Title
+-   Subtitle
+-   Description
+    -   The description will be put under the input box
+
+# Contact Form
+
+## Preview
+
+<Gallery images={['form-contact.png']} />
+
+## Main element
+
+### Accepted elements in the header
+
+-   Subheading
+-   Title
+-   Subtitle
+
+## Accepted elements in the body
+
+In the body of the form section, you can add any number of phone numbers and emails, these will automatically be added to the form in the appopriate format. You may also add an address, which will be displayed in the info.

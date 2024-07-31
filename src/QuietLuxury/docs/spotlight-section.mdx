@@ -1,0 +1,39 @@
+---
+sidebar_position: 5
+---
+
+import { Gallery, SchemaViewer } from '@site/src/components/index.js';
+
+# The Spotlight Component
+
+## Preview
+
+<Gallery
+    images={[
+        'left-all.png',
+        'left-icon.png',
+        'left-button.png',
+        'left-none.png',
+        'right-all.png'
+    ]}
+/>
+
+## Item elements
+
+### Accepted elements before header
+
+-   Icon _(optional)_
+    -   Takes an image element with size icon.
+
+### Accepted elements in the header
+
+-   Title
+-   Subtitle
+
+### Additional elements in body
+
+-   Image
+    -   Takes an image element.
+    -   The alignment of the image will be reflected in the component, allowing for more customization.
+-   Action Button _(optional)_
+    -   Takes a link element.

@@ -1,0 +1,71 @@
+title: 
+  en: List - Dynamic
+  fr: Liste - Dynamique
+description:
+  en: A component takes input of content profiles and displays them in a list, grid, or snapping card layout.
+  fr: Un composant prend en entrée des profils de contenu et les affiche dans une liste, une grille ou une carte de défilement.
+label:
+  en: List - Dynamic
+  fr: Liste - Dynamique
+assets:
+  Screenshot.png:
+    title: 
+      en: Showing selected project profiles.
+      fr: Affichage des profils de projet sélectionnés.
+input:
+  type: any
+  limit: false
+  manualFormatting: true
+
+elements:
+  title:
+
+items:
+  separator: divider
+  limit: 1
+  manualFormattingOnly: true
+  elements:
+    background:
+      title:
+        en: Profile Banner
+        fr: Bannière de profil
+      description: 
+        en: The picture of the profile.
+        fr: L'image du profil.
+    title:
+      description: 
+        en: The title of the profile.
+        fr: Le titre du profil.
+    subtitle:
+      description: 
+        en: The subtitle of the profile.
+        fr: Le sous-titre du profil.
+    link:
+      type: link
+      description: 
+        en: One or more social media links that attach to the profile.
+        fr: Un ou plusieurs liens de médias sociaux qui s'attachent au profil.
+
+properties:
+  layout:
+    label: 
+      en: Layout
+      fr: Mise en page
+    type: string
+    default: list
+    enum:
+      - label: 
+          en: List
+          fr: Liste
+        value: list
+      - label: 
+          en: Grid
+          fr: Grille
+        value: grid
+      - label: 
+          en: Snapping Cards
+          fr: Cartes de défilement
+        value: snapping
+    description: 
+      en: The layout of the section.
+      fr: La mise en page de la section.

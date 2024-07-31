@@ -1,0 +1,17 @@
+title: 
+  en: Assets - Dynamic
+  fr: Actifs - Dynamique
+description: 
+  en: A section of downloadable assets from a content profile section.
+  fr: Une section d'actifs téléchargeables à partir d'une section de profil de contenu.
+assets:
+  Screenshot.png:
+    title: 
+      en: Example of showing the assets of a content profile.
+      fr: Exemple d'affichage des actifs d'un profil de contenu.
+input:
+  type: any
+  limit: one
+
+elements: 
+  title:

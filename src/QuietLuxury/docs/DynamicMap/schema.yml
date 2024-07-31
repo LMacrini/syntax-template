@@ -1,0 +1,78 @@
+title: 
+  en: Map - Dynamic
+  fr: Carte - Dynamique
+description: 
+  en: Show locations as Pins on a Google Map, data is coming from the Research Places section of one or more selected profiles.
+  fr: Affichez les emplacements sous forme d'épingles sur une carte Google, les données proviennent de la section Lieux de recherche d'un ou de plusieurs profils sélectionnés.
+label:
+  en: Map - Dynamic
+  fr: Carte - Dynamique
+assets:
+  standard.png:
+    title: 
+      en: Map with pins and a list of locations on the left.
+      fr: Carte avec des épingles et une liste d'emplacements sur la gauche.
+  standard_detail.png:
+    title: 
+      en: Map with pins and the detail of the location's source profile.
+      fr: Carte avec des épingles et le détail du profil source de l'emplacement.
+  full_detail.png:
+    title: 
+      en: Map with pins and the detail of the location's source profile, in a full screen mode.
+      fr: Carte avec des épingles et le détail du profil source de l'emplacement, en mode plein écran.
+input:
+  type: any
+  limit: false
+
+elements:
+  title:
+
+properties:
+  full_size:
+    label: 
+      en: Full Size
+      fr: Taille réelle
+    type: boolean
+    default: false
+    description: 
+      en: Weather or not the map will take the full width and height of the screen.
+      fr: Si oui ou non la carte prendra toute la largeur et la hauteur de l'écran.
+  show_detail:
+    label: 
+      en: Show Details
+      fr: Afficher les détails
+    type: boolean
+    default: true
+    description: 
+      en: Whether or not to show the details of the source profile of the location.
+      fr: Si oui ou non afficher les détails du profil source de l'emplacement.
+  zoom:
+    label:
+      en: Initial Zoom Level
+      fr: Niveau de zoom initial
+    type: string
+    enum:
+      - label:
+          en: World view
+          fr: Vue du monde
+        value: "1"
+      - label:
+          en: Continent view
+          fr: Vue du continent
+        value: "5"
+      - label:
+          en: City view
+          fr: Vue de la ville
+        value: "10"
+      - label:
+          en: Street view
+          fr: Vue de la rue
+        value: "15"
+      - label:
+          en: Building view
+          fr: Vue du bâtiment
+        value: "20"
+    default: "5"
+    description: 
+      en: The zoom level of the map.
+      fr: Le niveau de zoom de la carte.

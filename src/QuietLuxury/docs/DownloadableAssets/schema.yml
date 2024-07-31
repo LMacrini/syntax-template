@@ -1,0 +1,17 @@
+title: 
+  en: Assets - Input
+  fr: Actifs - Entrée
+description: 
+  en: A section of downloadable assets from the input.
+  fr: Une section d'actifs téléchargeables de l'entrée.
+assets:
+  Screenshot.png:
+    title: 
+      en: Example of showing the assets of a content profile.
+      fr: Exemple d'affichage des actifs d'un profil de contenu.
+input:
+  type: any
+  limit: one
+
+elements: 
+  title:

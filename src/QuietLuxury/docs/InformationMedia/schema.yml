@@ -1,0 +1,32 @@
+title: 
+  en: Media Highlight
+  fr: Médias en vedette
+description:
+  en: This section calls attention to a specific image or video with plenty of space for a description.
+  fr: Cette section attire l'attention sur une image ou une vidéo spécifique et offre suffisamment d'espace pour une description.
+label:
+  en: Media Highlight
+  fr: Média en vedette
+assets:
+  img_center.png:
+    title: 
+      en: Content centered alignment with a image at bottom in light theme.
+      fr: Alignement centré du contenu avec une image en bas dans le thème clair.
+  img_left.png:
+    title: 
+      en: Content alignment to the left with a image on the right in dark theme.
+      fr: Alignement du contenu à gauche avec une image à droite dans le thème sombre.
+  video_right.png:
+    title: 
+      en: Content alignment to the right with a video on the left in dark theme.
+      fr: Alignement du contenu à droite avec une vidéo à gauche dans le thème sombre.
+
+elements:
+  pretitle:
+  title:
+    alignment: 'left,right,center'
+  subtitle:
+  text:
+  media:
+    type: 'image,video'
+

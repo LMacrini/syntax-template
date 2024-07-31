@@ -1,0 +1,57 @@
+title: 
+  en: Accent with Background image
+  fr: Accent avec image de fond
+description:
+  en: This section calls attention to a specific block of text on the website by putting an image in the background.
+  fr: Cette section attire l'attention sur un bloc de texte spécifique du site web en plaçant une image en arrière-plan.
+label:
+  en: Accent
+  fr: Accent
+assets:
+  Accent-Left.png:
+    title: 
+      en: A large image background with a title aligned to the left.
+      fr: Une grande image de fond avec un titre aligné à gauche.
+  Accent-Right.png:
+    title: 
+      en: A large image background with a title aligned to the right.
+      fr: Une grande image de fond avec un titre aligné à droite.
+
+elements:
+  background:
+  subtitle:
+  text:
+  link:
+
+properties:
+  alignment:
+    label: 
+      en: Content alignment
+      fr: Alignement du contenu
+    type: string
+    enum:
+      - label: 
+          en: Left
+          fr: Gauche
+        value: left
+      - label: 
+          en: Center
+          fr: Centre
+        value: center
+      - label: 
+          en: Right
+          fr: Droite
+        value: right
+    default: left
+    description: 
+      en: The alignment of the text content.
+      fr: L'alignement du contenu texte.
+  show_back_drop:
+    label: 
+      en: Text Backdrop
+      fr: Toile de fond du texte
+    type: boolean
+    default: false
+    description: 
+      en: Whether or not the text will have a backdrop.
+      fr: Si le texte aura ou non une toile de fond.

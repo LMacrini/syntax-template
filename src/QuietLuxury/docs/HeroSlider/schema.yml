@@ -1,0 +1,174 @@
+title: 
+  en: Introduction - with Slider
+  fr: Introduction - avec Slider
+description: 
+  en: The opening section of your website providing multiple rotating key pieces of information and images. Commonly known as a "carousel" section.
+  fr: La section d'ouverture de votre site web présentant plusieurs éléments clés d'information et d'images en rotation. Communément appelée section "carrousel".
+label:
+  en: Introduction - Hero with Slider
+  fr: Introduction - Hero avec Slider
+assets:
+  Screenshot.png:
+    title: 
+      en: With background image gradient, slider control and indicator.
+      fr: Avec dégradé d'image d'arrière-plan, contrôle du slider et indicateur.
+  HeroSlider-1.png:
+    title: 
+      en: A large image with a centre-aligned heading.
+      fr: Une grande image avec un titre centré.
+  HeroSlider-2.png:
+    title: 
+      en: A large image with a centre-aligned heading.
+      fr: Une grande image avec un titre centré.
+      
+
+items:
+  separator: divider
+  elements:
+    background:
+      layout: center, wide
+    pretitle:
+    title:
+      alignment: 'left,right,center'
+    subtitle:
+    text:
+    link:
+      type: link
+      description: 
+        en: One or more links that attach to the hero section.
+        fr: Un ou plusieurs liens qui s'attachent à la section hero.
+
+properties:
+  min_height:
+    label: 
+      en: Section height
+      fr: Hauteur de la section
+    type: string
+    default: 100vh
+    enum:
+      - label: 
+          en: 100% Screen Height
+          fr: 100% de la hauteur de l'écran
+        value: 100vh
+      - label: 
+          en: 80% Screen Height
+          fr: 80% de la hauteur de l'écran
+        value: 80vh
+      - label: 
+          en: 60% Screen Height
+          fr: 60% de la hauteur de l'écran
+        value: 60vh
+      - label: 
+          en: 40% Screen Height
+          fr: 40% de la hauteur de l'écran
+        value: 40vh
+    description: 
+      en: The height of the section.
+      fr: La hauteur de la section.
+  bg_size:
+    label:
+      en: Background Size
+      fr: Taille de l'arrière-plan
+    type: string
+    default: full
+    enum:
+      - label: 
+          en: Full
+          fr: Plein
+        value: full
+      - label: 
+          en: Partial
+          fr: Partiel
+        value: partial
+    description:
+      en: The size of the background image.
+      fr: La taille de l'image d'arrière-plan.
+  show_back_drop:
+    label: 
+      en: Text Backdrop
+      fr: Toile de fond du texte
+    type: boolean
+    default: false
+    description: 
+      en: Whether or not the text will have a backdrop.
+      fr: Si le texte aura ou non une toile de fond.
+  show_gradient:
+    label: 
+      en: Gradient
+      fr: Dégradé
+    type: boolean
+    default: false
+    description: 
+      en: Weather or not the background will have a gradient.
+      fr: Si l'arrière-plan aura ou non un dégradé.
+  gradient_from_pos:
+    label: 
+      en: Gradient From Position
+      fr: Position du dégradé à partir de
+    type: string
+    default: bottom
+    enum:
+      - label: 
+          en: Top
+          fr: Haut
+        value: top
+      - label: 
+          en: Bottom
+          fr: Bas
+        value: bottom
+    description: 
+      en: The position of the gradient from.
+      fr: La position du dégradé à partir de.
+  horizontal_alignment:
+    label: 
+      en: Horizontal Alignment
+      fr: Alignement horizontal
+    type: string
+    default: ""
+    enum:
+      - label: 
+          en: Left
+          fr: Gauche
+        value: left
+      - label: 
+          en: Center
+          fr: Centre
+        value: center
+      - label: 
+          en: Right
+          fr: Droite
+        value: right
+    description: 
+      en: The horizontal alignment of the text.
+      fr: L'alignement horizontal du texte.
+  vertical_alignment:
+    label: 
+      en: Vertical Alignment
+      fr: Alignement vertical
+    type: string
+    default: center
+    enum:
+      - label: 
+          en: Top
+          fr: Haut
+        value: top
+      - label: 
+          en: Center
+          fr: Centre
+        value: center
+      - label: 
+          en: Bottom
+          fr: Bas
+        value: bottom
+    description: 
+      en: The vertical alignment of the text.
+      fr: L'alignement vertical du texte.
+  slider_indicator:
+    label: 
+      en: Slider Indicator
+      fr: Indicateur de slider
+    type: boolean
+    default: true
+    description: 
+      en: Weather or not the slider will have an indicator.
+      fr: Si le slider aura ou non un indicateur.

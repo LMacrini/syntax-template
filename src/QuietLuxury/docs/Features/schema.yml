@@ -1,0 +1,55 @@
+title: 
+  en: Feature Section
+  fr: Section de fonctionnalités
+description: 
+  en: A section to display an overview of multiple related points, to convey an overall message about the items.
+  fr: Une section permettant d'afficher une vue d'ensemble de plusieurs points liés, afin de transmettre un message global sur les éléments.
+label:
+  en: Features
+  fr: Fonctionnalités
+assets:
+  Screenshot.png:
+    title: 
+      en: Basic usage.
+      fr: Utilisation de base.
+  Feautres-Centre.png:
+    title: 
+      en: A set of four key points with a header and subheader aligned to the centre.
+      fr: Une série de quatre points clés avec un en-tête et un sous-titre alignés au centre.
+  Features-Left.png:
+    title: 
+      en: A set of four key points with a header and subheader aligned to the left.
+      fr: Une série de quatre points clés avec un en-tête et un sous-titre alignés à gauche.
+  Features-Right.png:
+    title: 
+      en: A set of four key points with a header and subheader aligned to the right.
+      fr: Une série de quatre points clés avec un en-tête et un sous-titre alignés à droite.
+
+elements:
+  pretitle:
+  title:
+    alignment: 'left,right,center'
+  subtitle:
+  link:
+    type: link
+    description: 
+      en: One link.
+      fr: Un lien.
+
+items:
+  separator: divider
+  elements:
+    title:
+    subtitle:
+    text:
+    icon:
+      type: icon
+      description: 
+        en: Icons attached to the feature.
+        fr: Icônes attachées à la fonctionnalité.
+    link:
+      type: link
+      description: 
+        en: A link attached to the feature.
+        fr: Un lien attaché à la fonctionnalité.
+      

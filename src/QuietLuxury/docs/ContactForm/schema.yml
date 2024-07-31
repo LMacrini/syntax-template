@@ -1,0 +1,59 @@
+title: 
+  en: Contact Form
+  fr: Formulaire de contact
+description: 
+  en: This section provides an easy way for visitors to send you a message. All inquiries will be emailed to your Uniweb account email.
+  fr: Cette section permet aux visiteurs de vous envoyer facilement un message. Toutes les demandes seront envoyées à le courriel de votre compte Uniweb.
+label:
+  en: Contact
+  fr: Contact
+assets:
+  left_align.png:
+    title: 
+      en: Form align on the left.
+      fr: Aligner le formulaire à gauche.
+  right_align.png:
+    title: 
+      en: Form align on the right.
+      fr: Aligner le formulaire à droite.
+  ContactForm-Light.png:
+    title: 
+      en: Left aligned contact form in light mode.
+      fr: Formulaire de contact aligné à gauche en mode léger.
+  ContactForm-Dark.png:
+    title: 
+      en: Right aligned contact form in dark mode.
+      fr: Formulaire de contact aligné à droite en mode foncé.
+
+elements:
+  title:
+  subtitle:
+  text:
+    description: 
+      en: The address(es) and contact number(s) to attach to the contact form, separated by new lines.
+      fr: L'(es) adresse(s) et le(s) numéro(s) de contact à attacher au formulaire de contact, séparés par des sauts de ligne.
+  link:
+    type: link
+    description: 
+      en: One or more email addresses that attach to the contact form.
+      fr: Une ou plusieurs adresses e-mail qui s'attachent au formulaire de contact.
+
+properties:
+  form_align:
+    label: 
+      en: Form Alignment
+      fr: Alignement du formulaire
+    type: string
+    default: left
+    enum:
+      - label: 
+          en: Left
+          fr: Gauche
+        value: left
+      - label: 
+          en: Right
+          fr: Droite
+        value: right
+    description: 
+      en: The alignment of the form.
+      fr: L'alignement du formulaire.

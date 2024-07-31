@@ -1,0 +1,32 @@
+title: 
+  en: Call-to-Action
+  fr: Appel à l'action
+description: 
+  en: This section is designed to be eye-catching with an big image and button.
+  fr: Cette section est conçue pour attirer l'attention avec une grande image et un bouton.
+label:
+  en: CTA
+  fr: CTA
+assets:
+  Screenshot.png:
+    title: 
+      en: An example with a banner image, title, pretitle, content and a link.
+      fr: Un exemple avec une image de bannière, un titre, un pré-titre, un contenu et un lien.
+  CTA-Light.png:
+    title: 
+      en: Standard Call-to-Action with a large image, aligned to the left, in light mode
+      fr: Appel à l'action standard avec une grande image, alignée à gauche, en mode léger.
+  CTA-Dark.png:
+    title: 
+      en: Standard Call-to-Action with a large image, aligned to the left, in dark mode
+      fr: Appel à l'action standard avec une grande image, alignée à gauche, en mode foncé.
+
+elements:
+  background:
+  pretitle:
+  title:
+  subtitle:
+  link:
+    type: link
+  media:
+    type: image

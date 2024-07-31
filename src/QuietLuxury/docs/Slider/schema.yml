@@ -1,0 +1,108 @@
+title: 
+  en: Slider - Carousel
+  fr: Slider - Carrousel
+description: 
+  en: Display multiple rotating pieces of information, each with a background immage.
+  fr: Affichez plusieurs éléments d'information en rotation, chacun avec une image de fond.
+label:
+  en: Slider - Carousel
+  fr: Slider - Carrousel
+assets:
+  with_indicator.png:
+    title: 
+      en: With text backdrop, slider control and indicator.
+      fr: Avec toile de fond du texte, contrôle du slider et indicateur.
+  bg_overlay.png:
+    title: 
+      en: With background overlay, slider control and text aligned center-bottom.
+      fr: Avec superposition d'arrière-plan, contrôle du slider et texte aligné centre-bas.
+
+items:
+  separator: divider
+  elements:
+    background:
+      layout: center, wide
+    pretitle:
+    title:
+      alignment: 'left,right,center'
+    subtitle:
+    text:
+    link:
+      type: link
+      description: 
+        en: One or more links that attach to the hero section.
+        fr: Un ou plusieurs liens qui s'attachent à la section hero.
+
+properties:
+  show_back_drop:
+    label: 
+      en: Text Backdrop
+      fr: Toile de fond du texte
+    type: boolean
+    default: false
+    description: 
+      en: Whether or not the text will have a backdrop.
+      fr: Si le texte aura ou non une toile de fond.
+  background_overlay:
+    label: 
+      en: Background Overlay
+      fr: Superposition d'arrière-plan
+    type: boolean
+    default: false
+    description: 
+      en: Weather or not the background will have an overlay.
+      fr: Si l'arrière-plan aura ou non une superposition.
+  horizontal_alignment:
+    label: 
+      en: Horizontal Alignment
+      fr: Alignement horizontal
+    type: string
+    default: ""
+    enum:
+      - label: 
+          en: Left
+          fr: Gauche
+        value: left
+      - label: 
+          en: Center
+          fr: Centre
+        value: center
+      - label: 
+          en: Right
+          fr: Droite
+        value: right
+    description: 
+      en: The horizontal alignment of the text.
+      fr: L'alignement horizontal du texte.
+  vertical_alignment:
+    label: 
+      en: Vertical Alignment
+      fr: Alignement vertical
+    type: string
+    default: center
+    enum:
+      - label: 
+          en: Top
+          fr: Haut
+        value: top
+      - label: 
+          en: Center
+          fr: Centre
+        value: center
+      - label: 
+          en: Bottom
+          fr: Bas
+        value: bottom
+    description: 
+      en: The vertical alignment of the text.
+      fr: L'alignement vertical du texte.
+  slider_indicator:
+    label: 
+      en: Slider Indicator
+      fr: Indicateur de slider
+    type: boolean
+    default: true
+    description: 
+      en: Weather or not the slider will have an indicator.
+      fr: Si le slider aura ou non un indicateur.
+

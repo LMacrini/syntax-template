@@ -1,0 +1,40 @@
+---
+sidebar_position: 6
+---
+
+import { Gallery, SchemaViewer } from '@site/src/components/index.js';
+
+# Blog Section
+
+This section is a collection of blog posts from a list source.
+
+## Preview
+
+<Gallery images={['blog.png']} />
+
+## Blog Section Settings
+
+### Data source:
+
+-   This component takes a list of articles as its data source and displays them as cards.
+
+## Main element
+
+### Accepted elements in the header
+
+-   Title
+-   Subtitle
+
+## Parameters
+
+| name        | type    | description                                        |
+| ----------- | ------- | -------------------------------------------------- |
+| `blog_page` | boolean | Set to true if the blog section is on its own page |
+
+```
+blog_page: true
+```
+
+```
+blog_page: false
+```

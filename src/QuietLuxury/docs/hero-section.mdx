@@ -1,0 +1,41 @@
+---
+sidebar_position: 2
+---
+
+import { Gallery, SchemaViewer } from '@site/src/components/index.js';
+
+# The Hero Component
+
+## Preview
+
+<Gallery
+    images={[
+        'hero/videonewsletter.png',
+        'hero/video.png',
+        'hero/newsletter.png',
+        'hero/empty.png'
+    ]}
+/>
+
+## Main element
+
+### Accepted elements before header
+
+-   Background image _(optional)_
+    -   Takes an image element.
+    -   If none is provided the background will be the primary color defined by the user in the web theme.
+
+### Accepted elements in the header
+
+-   Subheading
+-   Title
+-   Subtitle
+
+### Additional elements in body
+
+-   Newsletter _(optional)_
+    -   Takes a paragraph element as a prompt.
+-   Video _(optional)_
+    -   Takes a thumbnail and a video element.
+-   Action Link _(optional)_
+    -   Takes a link element.

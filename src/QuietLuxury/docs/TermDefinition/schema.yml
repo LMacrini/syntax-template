@@ -1,0 +1,41 @@
+title: 
+  en: Term Definitions
+  fr: Définitions des termes
+description:
+  en: A section to briefly explain a set of terms.
+  fr: Une section pour expliquer brièvement un ensemble de termes.
+label:
+  en: Glossary
+  fr: Glossaire
+assets:
+  Screenshot.png:
+    title: 
+      en: Example of an odd number of term items, each has a leading logo, title and description.
+      fr: Exemple d'un nombre impair d'éléments de termes, chacun a un logo principal, un titre et une description.
+  Glossary-Light.png:
+    title: 
+      en: A set of four elements, each with an icon and a description, in light mode.
+      fr: Un ensemble de quatre éléments, chacun avec une icône et une description, en mode léger.
+
+elements:
+  title:
+  subtitle:
+
+items:
+  separator: divider
+  elements:
+    background:
+    title:
+    text:
+    pretitle:
+    icon:
+      type: icon
+      description: 
+        en: Icons attached to the feature.
+        fr: Icônes attachées à la fonctionnalité.
+    media:
+      type: video
+      description: 
+        en: A video attached to the feature.
+        fr: Une vidéo attachée à la fonctionnalité.
+

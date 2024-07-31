@@ -1,0 +1,49 @@
+title: 
+  en: Article
+  fr: Article
+label: 
+  en: Article
+  fr: Article
+description: 
+  en: A section to display an selected article from the input.
+  fr: Une section pour afficher un article sélectionné de l'entrée.
+input:
+  type: articles
+  limit: one
+
+properties:
+  width:  
+    label:
+      en: Section Width
+      fr: Largeur de la section
+    type: string
+    default: lg
+    enum:
+      - label:
+          en: Medium
+          fr: Moyen
+        value: md
+      - label:
+          en: Large
+          fr: Large
+        value: lg
+      - label:
+          en: Extra Large
+          fr: Très grand
+        value: xl
+      - label:
+          en: Double Extra Large
+          fr: Double très grand
+        value: 2xl
+    description:
+      en: The width of the section.
+      fr: La largeur de la section.
+  show_back_link:
+    label:
+      en: Show Back Link
+      fr: Afficher le lien de retour
+    type: boolean
+    default: true
+    description:
+      en: Show a back link to the article list.
+      fr: Afficher un lien de retour à la liste des articles.

@@ -1,0 +1,22 @@
+title: 
+  en: Icon Grid
+  fr: Grille d'icônes
+description: 
+  en: A section to show a selection of icons, logos, or other images.
+  fr: Section permettant d'afficher une sélection d'icônes, de logos ou d'autres images.
+label:
+  en: Icon Grid
+  fr: Grille d'icônes
+assets:
+  Screenshot.png:
+    title: 
+      en: Basic usage.
+      fr: Utilisation de base.
+
+elements:
+  title:
+
+items:
+  separator: divider
+  elements:
+    background:

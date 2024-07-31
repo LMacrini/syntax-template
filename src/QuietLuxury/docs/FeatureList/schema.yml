@@ -1,0 +1,36 @@
+title: 
+  en: Feature with sub features
+  fr: Fonctionnalité avec sous-fonctionnalités
+description: 
+  en: A section to display a list within a list, displayed in individual cards with a background image.
+  fr: Section permettant d'afficher une liste à l'intérieur d'une liste, sous forme de cartes individuelles avec une image de fond.
+label:
+  en: Features - List
+  fr: Fonctionnalités - List
+assets:
+  Screenshot.png:
+    title: 
+      en: A main title and subtitle with three items each show the feature with a leading image, title, feature details and link.
+      fr: Un titre principal et un sous-titre avec trois éléments chacun montrent la fonctionnalité avec une image principale, un titre, des détails de fonctionnalité et un lien.
+
+elements:
+  background:
+  title:
+  subtitle:
+
+items:
+  separator: divider
+  elements:
+    background:
+    title:
+      alignment: ""
+    list:
+      type: list
+      description: 
+        en: A list of texts attached to the solution item.
+        fr: Une liste de textes attachés à l'élément de solution.
+    link:
+      type: link
+      description: 
+        en: A link attached to the solution item.
+        fr: Un lien attaché à l'élément de solution.

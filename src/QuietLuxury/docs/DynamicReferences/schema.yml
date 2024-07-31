@@ -1,0 +1,12 @@
+title: 
+  en: References - Dynamic
+  fr: Références - Dynamique
+description: 
+  en: Showing the references from the input with filtering and sorting, formate is fixed.
+  fr: Affichage des références de l'entrée avec filtrage et tri, le format est fixe.
+input:
+  type: reference
+  limit: false
+
+elements:
+  title:

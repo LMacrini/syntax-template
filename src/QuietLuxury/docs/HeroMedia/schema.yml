@@ -1,0 +1,160 @@
+title: 
+  en: Introduction - with Media
+  fr: Introduction - avec les médias
+description: 
+  en: The opening section of your website providing a key piece of information and a video background. Commonly known as a "hero" section.
+  fr: La section d'ouverture de votre site web fournissant un élément d'information clé et un arrière-plan vidéo. Communément appelée section "hero".
+label:
+  en: Introduction - with Media
+  fr: Introduction - avec les médias
+assets:
+  media_bg.png:
+    title: 
+      en: With background video, text backdrop and top gradient.
+      fr: Avec vidéo d'arrière-plan, toile de fond du texte et dégradé supérieur.
+  media_facade.png:
+    title: 
+      en: With background image, text content and a video with a facade.
+      fr: Avec image d'arrière-plan, contenu texte et une vidéo avec une façade.
+  media_right.png:
+    title: 
+      en: With background image, text content aligned to the right and a video.
+      fr: Avec image d'arrière-plan, contenu texte aligné à droite et une vidéo.
+
+elements:
+  background:
+    description: 
+      en: The optional background image.
+      fr: L'image d'arrière-plan facultative.
+  pretitle:
+  title:
+  subtitle:
+  text:
+  link:
+    type: link
+    description: 
+      en: One or more links that attach to the hero section.
+      fr: Un ou plusieurs liens qui s'attachent à la section hero.
+  media:
+    type: 'image,video'
+    description: 
+      en: The image or video of the hero section.
+      fr: L'image ou la vidéo de la section hero.
+
+properties:
+  min_height:
+    label: 
+      en: Section height
+      fr: Hauteur de la section
+    type: string
+    default: 100vh
+    enum:
+      - label: 
+          en: 100% Screen Height
+          fr: 100% de la hauteur de l'écran
+        value: 100vh
+      - label: 
+          en: 80% Screen Height
+          fr: 80% de la hauteur de l'écran
+        value: 80vh
+      - label: 
+          en: 60% Screen Height
+          fr: 60% de la hauteur de l'écran
+        value: 60vh
+      - label: 
+          en: 40% Screen Height
+          fr: 40% de la hauteur de l'écran
+        value: 40vh
+    description: 
+      en: The minimum height of the section, it grows if the content is larger.
+      fr: La hauteur minimale de la section, elle augmente si le contenu est plus grand.
+  show_back_drop:
+    label: 
+      en: Text Backdrop
+      fr: Toile de fond du texte
+    type: boolean
+    default: false
+    description: 
+      en: Whether or not the text will have a backdrop.
+      fr: Si le texte aura ou non une toile de fond.
+  show_gradient:
+    label: 
+      en: Gradient
+      fr: Dégradé
+    type: boolean
+    default: false
+    description: 
+      en: Weather or not the background will have a gradient.
+      fr: Si l'arrière-plan aura ou non un dégradé.
+  gradient_from_pos:
+    label: 
+      en: Gradient From Position
+      fr: Position du dégradé à partir de
+    type: string
+    default: bottom
+    enum:
+      - label: 
+          en: Top
+          fr: Haut
+        value: top
+      - label: 
+          en: Bottom
+          fr: Bas
+        value: bottom
+    description: 
+      en: The position of the gradient from.
+      fr: La position du dégradé à partir de.
+  horizontal_alignment:
+    label: 
+      en: Horizontal Alignment
+      fr: Alignement horizontal
+    type: string
+    default: ""
+    enum:
+      - label: 
+          en: Left
+          fr: Gauche
+        value: left
+      - label: 
+          en: Center
+          fr: Centre
+        value: center
+      - label: 
+          en: Right
+          fr: Droite
+        value: right
+    description: 
+      en: The horizontal alignment of the text content or the media content, in case both exist, it is the horizontal alignment of the text content.
+      fr: L'alignement horizontal du contenu texte ou du contenu média, dans le cas où les deux existent, c'est l'alignement horizontal du contenu texte.
+  vertical_alignment:
+    label: 
+      en: Vertical Alignment
+      fr: Alignement vertical
+    type: string
+    default: center
+    enum:
+      - label: 
+          en: Top
+          fr: Haut
+        value: top
+      - label: 
+          en: Center
+          fr: Centre
+        value: center
+      - label: 
+          en: Bottom
+          fr: Bas
+        value: bottom
+    description: 
+      en: The vertical alignment of the content.
+      fr: L'alignement vertical du contenu.
+  media_as_bg:
+    label: 
+      en: Media as Background
+      fr: Média comme arrière-plan
+    type: boolean
+    default: false
+    description: 
+      en: Weather or not the media will be used as a background, the facade will be ignored.
+      fr: Si le média sera ou non utilisé comme arrière-plan, la façade sera ignorée.
+

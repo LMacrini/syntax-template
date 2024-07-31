@@ -1,0 +1,34 @@
+title: 
+  en: Feature Cards
+  fr: Fonctionnalités en carte
+description: 
+  en: A component to show distinct pieces of information each with their own visual card.
+  fr: Un composant permettant de présenter des éléments d'information distincts, chacun avec sa propre carte visuelle.
+label:
+  en: Features - Card
+  fr: Fonctionnalités - Carte
+assets:
+  Screenshot.png:
+    title: 
+      en: Example with a leading title and three feature items.
+      fr: Exemple avec un titre principal et trois éléments de fonctionnalité.
+  FeaturesCard-Centre.png:
+    title: 
+      en: A set of four cards with the title aligned to the centre in dark mode.
+      fr: Un ensemble de quatre cartes avec le titre aligné au centre en mode foncé.
+  FeaturesCard-Left.png:
+    title: 
+      en: A set of four cards with a left aligned title in light mode.
+      fr: Un ensemble de quatre cartes avec un titre aligné à gauche en mode léger.
+
+elements:
+  pretitle:
+  title: 
+  subtitle:
+
+items:
+  separator: divider
+  elements:
+    background:
+    title:
+    text:

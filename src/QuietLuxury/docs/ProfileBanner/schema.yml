@@ -1,0 +1,87 @@
+title: 
+  en: Banner - Dynamic
+  fr: Bannière - Dynamique
+description: 
+  en: A component renders the banner image of the input profile as well as the profile title.
+  fr: Un composant rend l'image de bannière du profil d'entrée ainsi que le titre du profil.
+input:
+  type: any
+  limit: one
+
+properties:
+  content_position:
+    label:
+      en: Content Position
+      fr: Position du contenu
+    type: string
+    default: mid-center
+    enum:
+      - label:
+          en: Top Left
+          fr: Haut gauche
+        value: top-left
+      - label:
+          en: Top Center
+          fr: Haut centre
+        value: top-center
+      - label:
+          en: Top Right
+          fr: Haut droit
+        value: top-right
+      - label:
+          en: Middle Left
+          fr: Milieu gauche
+        value: mid-left
+      - label:
+          en: Middle Center
+          fr: Milieu centre
+        value: mid-center
+      - label:
+          en: Middle Right
+          fr: Milieu droit
+        value: mid-right
+      - label:
+          en: Bottom Left
+          fr: Bas gauche
+        value: bottom-left
+      - label:
+          en: Bottom Center
+          fr: Bas centre
+        value: bottom-center
+      - label:
+          en: Bottom Right
+          fr: Bas droit
+        value: bottom-right
+    description: 
+      en: The position of the text in header.
+      fr: La position du texte dans l'en-tête.
+  text_backdrop_style:
+    label:
+      en: Text Backdrop Style
+      fr: Style de fond de texte
+    type: string
+    enum:
+      - label:
+          en: None
+          fr: Aucun
+        value: none
+      - label:
+          en: Elegant gradient background (deep indigo to vibrant blue)
+          fr: Arrière-plan dégradé élégant (indigo profond à bleu vibrant)
+        value: indigo_blue_gradient
+      - label:
+          en: Frosted Glass effect (slightly blurred gray background and white text)
+          fr: Effet de verre givré (arrière-plan gris légèrement flou et texte blanc)
+        value: frosted_glass
+      - label:
+          en: Understated Gray (light gray background and matching gray text, rounded corners)
+          fr: Gris discret (arrière-plan gris clair et texte gris assorti, coins arrondis)
+        value: understated_gray
+      - label:
+          en: Soft Pastel Palette (pink background paired with deep purple text, rounded corners)
+          fr: Palette de pastels doux (fond rose associé à un texte violet foncé, coins arrondis)
+        value: soft_pastel
+    default: none
+    description: 
+      en: The style of the text backdrop.
+      fr: Le style du fond de texte.

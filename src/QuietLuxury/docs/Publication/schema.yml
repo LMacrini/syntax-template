@@ -1,0 +1,49 @@
+title: 
+  en: Publications
+  fr: Publications
+description: 
+  en: A section to list your publications in APA, MLA, Chicago, or Harvard citation style, pulled directly from your Uniweb network.
+  fr: Une section pour lister vos publications dans le style de citation APA, MLA, Chicago, ou Harvard, tirées directement de votre réseau Uniweb.
+assets:
+  Screenshot.png:
+    title: 
+      en: Basic usage.
+      fr: Utilisation de base.
+input:
+  type: reference
+  limit: false
+
+elements:
+  title:
+
+properties:
+  cite_format:
+    label: 
+      en: Citation format
+      fr: Format de citation
+    type: string
+    default: apa
+    enum:
+      - label: 
+          en: APA
+          fr: APA
+        value: apa
+      - label: 
+          en: Chicago
+          fr: Chicago
+        value: chicago
+      - label: 
+          en: Vancouver
+          fr: Vancouver
+        value: vancouver
+      - label: 
+          en: MLA
+          fr: MLA
+        value: mla
+      - label: 
+          en: Harvard
+          fr: Harvard
+        value: harvard
+    description: 
+      en: The format of the citation, can be apa, chicago, vancouver, mla, harvard or all.
+      fr: Le format de la citation, peut être apa, chicago, vancouver, mla, harvard ou tous.

@@ -1,0 +1,85 @@
+title: 
+  en: Team Roster
+  fr: Liste d'équipe
+description: 
+  en: Display a grid of team members with large pictures and social media links.
+  fr: Affichez une grille des membres de l'équipe avec de grandes photos et des liens vers les médias sociaux.
+label:
+  en: Team
+  fr: Équipe
+assets:
+  Screenshot.png:
+      title: 
+        en: Team Roster in light theme with picture aspect ratio 3:2.
+        fr: Liste d'équipe en thème clair avec un rapport d'aspect d'image de 3:2.
+  TeamRoster-Dark.png:
+      title: 
+        en: Three team members with square portraits, in dark mode.
+        fr: Trois membres de l'équipe avec des portraits carrés, en mode foncé.
+  TeamRoster-Light.png:
+      title: 
+        en: Three team members with square portraits, in light mode.
+        fr: Trois membres de l'équipe avec des portraits carrés, en mode léger.
+input:
+  type: members
+  limit: false
+  manualFormatting: true
+
+elements:
+  title:
+    alignment: 'left,right,center'
+  subtitle:
+
+items:
+  separator: divider
+  elements:
+    background:
+      description: 
+        en: The picture of the member.
+        fr: L'image du membre.
+    title:
+      description: 
+        en: The name of the member.
+        fr: Le nom du membre.
+    subtitle:
+      description: 
+        en: The title of the member.
+        fr: Le titre du membre.
+    link:
+      type: link
+      description: 
+        en: One or more social media links that attach to the member.
+        fr: Un ou plusieurs liens de médias sociaux qui s'attachent au membre.
+
+properties:
+  aspect_ratio:
+    label: 
+      en: Picture Aspect Ratio
+      fr: Rapport d'aspect de l'image
+    type: string
+    default: "3/2"
+    enum:
+      - label: 
+          en: 1:1
+          fr: 1:1
+        value: "1/1"
+      - label: 
+          en: 3:2
+          fr: 3:2
+        value: "3/2"
+      - label: 
+          en: 3:4
+          fr: 3:4
+        value: "3/4"
+      - label: 
+          en: 4:5
+          fr: 4:5
+        value: "4/5"
+      - label: 
+          en: 16:9
+          fr: 16:9
+        value: "16/9"
+    description: 
+      en: The aspect ratio of the picture (width:height).
+      fr: Le rapport d'aspect de l'image (largeur:hauteur).
+

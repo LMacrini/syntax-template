@@ -1,0 +1,22 @@
+title: 
+  en: Basic Cards
+  fr: Cartes de base
+description: 
+  en: A component to show distinct pieces of information each with their own visual card.
+  fr: Un composant permettant de présenter des éléments d'information distincts, chacun avec sa propre carte visuelle.
+label:
+  en: Cards - Basic
+  fr: Cartes - De base
+
+elements:
+  title:
+  subtitle:
+  
+items:
+  separator: divider
+  elements:
+    background:
+    title:
+    subtitle:
+    text:
+    link:

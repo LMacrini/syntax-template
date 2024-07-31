@@ -1,0 +1,28 @@
+{
+    "name": "quiet-luxury",
+    "version": "0.1.0",
+    "private": true,
+    "description": "",
+    "license": "MIT",
+    "main": "index.js",
+    "peerDependencies": {
+        "react": "*",
+        "react-dom": "*"
+    },
+    "dependencies": {
+        "@headlessui/react": "^1.7.13",
+        "@react-google-maps/api": "^2.18.1",
+        "@tailwindcss/line-clamp": "^0.4.4",
+        "@uniwebcms/module-sdk": "^1.22.0",
+        "citation-js": "^0.6.4",
+        "flowbite": "^1.8.1",
+        "flowbite-react": "^0.6.4",
+        "lodash.mergewith": "^4.6.2",
+        "react": "^18.2.0",
+        "react-click-away-listener": "^2.2.3",
+        "react-dom": "^18.2.0",
+        "react-icons": "^4.8.0",
+        "react-spinners": "^0.13.8",
+        "tailwindcss": "^3.3.3"
+    }
+}
