@@ -56,6 +56,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["clsx", "npm:2.1.1"],\
           ["gh-pages", "npm:5.0.0"],\
           ["react", "npm:17.0.2"],\
           ["react-dom", "virtual:824c58c4ca55fef1a076a1e64b7aec198a1ece2c5def509c3d1d297365e28d0ced92769a9e6ef28770f6904227157ce4b4bf37f4004599fd784716c78f724d03#npm:17.0.2"]\
@@ -8071,6 +8072,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/clsx-npm-1.2.1-77792dc182-5ded6f61f1.zip/node_modules/clsx/",\
         "packageDependencies": [\
           ["clsx", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:2.1.1", {\
+        "packageLocation": "./.yarn/cache/clsx-npm-2.1.1-96125b98be-cdfb57fa6c.zip/node_modules/clsx/",\
+        "packageDependencies": [\
+          ["clsx", "npm:2.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17072,6 +17080,7 @@ const RAW_RUNTIME_STATE =
           ["@headlessui/react", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:1.7.16"],\
           ["@tailwindcss/line-clamp", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:0.4.4"],\
           ["@uniwebcms/module-sdk", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:1.22.0"],\
+          ["clsx", "npm:2.1.1"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:18.2.0"],\
           ["react-icons", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:4.12.0"],\
@@ -18895,6 +18904,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["website-components-template", "workspace:."],\
+          ["clsx", "npm:2.1.1"],\
           ["gh-pages", "npm:5.0.0"],\
           ["react", "npm:17.0.2"],\
           ["react-dom", "virtual:824c58c4ca55fef1a076a1e64b7aec198a1ece2c5def509c3d1d297365e28d0ced92769a9e6ef28770f6904227157ce4b4bf37f4004599fd784716c78f724d03#npm:17.0.2"]\
