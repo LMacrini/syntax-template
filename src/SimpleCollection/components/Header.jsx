@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function GitHubIcon(props) {
     return (
@@ -9,6 +9,7 @@ function GitHubIcon(props) {
   }
   
 export default (props) => {
+    console.log("This is the header")
     let [isScrolled, setIsScrolled] = useState(false)
   
     useEffect(() => {
