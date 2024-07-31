@@ -13,7 +13,6 @@ export default (props) => {
     if (props === undefined) {
       return null;
     }
-    console.log("THESE ARE THE PROPS FOR THE HEADER", props)
     let [isScrolled, setIsScrolled] = useState(false)
   
     useEffect(() => {
@@ -43,7 +42,6 @@ export default (props) => {
 
     dividedContent.push(currentSubArray);
 
-    console.log(dividedContent)
 
     return (
       <header
