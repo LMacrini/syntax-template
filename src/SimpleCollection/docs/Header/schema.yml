@@ -1,0 +1,17 @@
+title: 
+  en: Header
+  fr: Header
+description: 
+  en: Header
+  fr: Header
+label:
+  en: Header
+  fr: Header
+# assets:
+#   Screenshot.png:
+#     title: 
+#       en: Screenshot Description
+#       fr: Description de la capture d'écran
+
+elements:
+  title:
