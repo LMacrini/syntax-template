@@ -126,3 +126,5 @@ apps/*/public/dev
 /tutorial/.docusaurus
 /tutorial/.cache-loader
 /tutorial/static/img/dimensions.json
+
+*.DS_Store
