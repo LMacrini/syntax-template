@@ -66,7 +66,7 @@ export default (props) => {
 
             {dividedContent[0].map(element => {
             const text = element.content[0].text.trim().split('\n');
-            // console.log("text and text length: ", text, text.length)
+
             if (text.length === 1) {
               return <path d={text[0]} />; 
             } else {
