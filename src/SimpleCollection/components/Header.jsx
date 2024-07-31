@@ -23,7 +23,7 @@ export default (props) => {
       }
     }, [])
 
-    const { block: { content } } = props;
+    const { block: { content: {content} } } = props;
 
     const dividedContent = [];
     let currentSubArray = [];
