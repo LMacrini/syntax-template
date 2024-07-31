@@ -9,7 +9,7 @@ function GitHubIcon(props) {
   }
   
 export default (props) => {
-    console.log("This is the header")
+    console.log(props)
     let [isScrolled, setIsScrolled] = useState(false)
   
     useEffect(() => {
