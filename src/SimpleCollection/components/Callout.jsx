@@ -27,7 +27,6 @@ export default function Callout(props) {
   if (props === undefined) {
     return
   }
-  console.log(props)
 
   const block = props.block.content.content[0]
   if (block.type !== "WarningBlock") {
