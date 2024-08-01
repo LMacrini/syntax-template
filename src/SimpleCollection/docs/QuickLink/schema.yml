@@ -18,7 +18,6 @@ properties:
       en: Icon
       fr: Icône
     type: string
-    default: Installation
     enum:
       - label:
           en: Installation
