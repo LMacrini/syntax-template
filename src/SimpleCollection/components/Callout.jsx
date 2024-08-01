@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { Icon } from './Icon'
 
 const styles = {
-  note: {
+  info: {
     container:
       'bg-sky-50 dark:bg-slate-800/60 dark:ring-1 dark:ring-slate-300/10',
     title: 'text-sky-900 dark:text-sky-400',
@@ -19,23 +19,38 @@ const styles = {
 }
 
 const icons = {
-  note: (props) => <Icon icon="lightbulb" {...props} />,
+  info: (props) => <Icon icon="lightbulb" {...props} />,
   warning: (props) => <Icon icon="warning" color="amber" {...props} />,
 }
 
 export default function Callout(props) {
-  const type = 'note';
+  if (props === undefined) {
+    return
+  }
+  console.log(props)
+
+  const block = props.block.content.content[0]
+  if (block.type !== "WarningBlock") {
+    return
+  }
+
+  const { content, attrs: { type } } = block;
+  if (!type in icons) {
+    return
+  }
   let IconComponent = icons[type];
 
+  const hasTitle = content[0].marks.find((mark) => mark.type === 'bold');
+  
   return (
     <div className={clsx('my-8 flex rounded-3xl p-6', styles[type].container)}>
       <IconComponent className="h-8 w-8 flex-none" />
       <div className="ml-4 flex-auto">
         <p className={clsx('m-0 font-display text-xl', styles[type].title)}>
-
+            {hasTitle ? content[0].text : ''}
         </p>
         <div className={clsx('prose mt-2.5', styles[type].body)}>
-
+            {(hasTitle ? content.slice(1) : content).map(obj => obj.text).join('').trim()}
         </div>
       </div>
     </div>
