@@ -21,7 +21,10 @@ function EmptyButton( { variant, ...props } ) {
 }
 
 export default function Button( props ) {
-    const { type, href } = props.block.getBlockProperties();
+    let { type, href } = props.block.getBlockProperties();
+    if (!(type in variantStyles)) {
+      type = 'primary'
+    }
     const { block: { main: { body: { paragraphs } } } } = props;
     return <EmptyButton href={href} variant={type} {...props}>{paragraphs.join('\n').trim()}</EmptyButton>
 }

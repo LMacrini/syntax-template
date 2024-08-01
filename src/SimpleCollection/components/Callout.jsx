@@ -28,28 +28,24 @@ export default function Callout(props) {
     return
   }
 
-  const block = props.block.content.content[0]
-  if (block.type !== "WarningBlock") {
-    return
-  }
+  const { block: { main: { header: { title },  body: { paragraphs } } } } = props;
 
-  const { content, attrs: { type } } = block;
-  if (!type in icons) {
-    return
+  let { type } = props.block.getBlockProperties();
+  
+  if (!(type in icons)) {
+    type = 'info'
   }
   let IconComponent = icons[type];
-
-  const hasTitle = content[0].marks.find((mark) => mark.type === 'bold');
   
   return (
     <div className={clsx('my-8 flex rounded-3xl p-6', styles[type].container)}>
       <IconComponent className="h-8 w-8 flex-none" />
       <div className="ml-4 flex-auto">
         <p className={clsx('m-0 font-display text-xl', styles[type].title)}>
-            {hasTitle ? content[0].text : ''}
+          {title}
         </p>
         <div className={clsx('prose mt-2.5', styles[type].body)}>
-            {(hasTitle ? content.slice(1) : content).map(obj => obj.text).join('').trim()}
+          {paragraphs.map(paragraph => <p>{paragraph}</p>)}
         </div>
       </div>
     </div>
