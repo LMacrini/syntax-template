@@ -1,0 +1,17 @@
+title: 
+  en: Callout
+  fr: Callout
+description: 
+  en: Callout
+  fr: Callout
+label:
+  en: Callout
+  fr: Callout
+# assets:
+#   Screenshot.png:
+#     title: 
+#       en: Screenshot Description
+#       fr: Description de la capture d'écran
+
+elements:
+  title:
