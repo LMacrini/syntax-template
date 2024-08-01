@@ -38,3 +38,11 @@ properties:
     description:
       en: Icon of the card
       fr: Icône de la carte
+  href:
+    label:
+      en: URL
+      fr: URL
+    type: string
+    description:
+      en: URL of the card
+      fr: URL de la carte
