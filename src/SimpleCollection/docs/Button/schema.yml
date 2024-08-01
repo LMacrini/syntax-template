@@ -37,3 +37,12 @@ properties:
     description:
       en: Controls the type of button
       fr: Contrôle le type de bouton
+  href:
+    label:
+      en: URL
+      fr: URL
+    type: string
+    default: undefined
+    description:
+      en: The link where the button sends
+      fr: Le lien où envoie le bouton
