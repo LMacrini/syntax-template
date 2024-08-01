@@ -1,0 +1,96 @@
+title: 
+  en: Section
+  fr: Section
+description:
+  en: A section that displays the content in the editor without any special formatting.
+  fr: Une section qui affiche le contenu dans l'éditeur sans aucune mise en forme particulière.
+assets:
+  Screenshot.png:
+    title: 
+      en: Basic usage.
+      fr: Utilisation de base.
+  Section-Dark.png:
+    title: 
+      en: A simple section with headings, an alert box, and table, in dark mode.
+      fr: Une section simple avec des titres, une boîte d'alerte et un tableau, en mode foncé.
+  Section-Light.png:
+    title: 
+      en: A simple section with headings, an alert box, and table, in light mode.
+      fr: Une section simple avec des titres, une boîte d'alerte et un tableau, en mode léger.
+
+elements:
+  _raw: 
+    en: This category renders content from the Webpages editor as-is.
+    fr: Cette catégorie affiche le contenu de l'éditeur de pages tel quel.
+
+properties:
+  vertical_padding:
+    label:
+      en: Vertical Padding
+      fr: Rembourrage vertical
+    type: string
+    default: lg
+    enum:
+      - label:
+          en: Large
+          fr: Large
+        value: lg
+      - label:
+          en: Medium
+          fr: Moyen
+        value: md
+      - label:
+          en: Small
+          fr: Petit
+        value: sm
+    description:
+      en: The vertical padding of the section.
+      fr: Le rembourrage vertical de la section.
+  width:  
+    label:
+      en: Section Width
+      fr: Largeur de la section
+    type: string
+    default: lg
+    enum:
+      - label:
+          en: Medium
+          fr: Moyen
+        value: md
+      - label:
+          en: Large
+          fr: Large
+        value: lg
+      - label:
+          en: Extra Large
+          fr: Très grand
+        value: xl
+      - label:
+          en: Double Extra Large
+          fr: Double très grand
+        value: 2xl
+    description:
+      en: The width of the section.
+      fr: La largeur de la section.
+  columns:
+    label:
+      en: Number of Columns
+      fr: Nombre de colonnes
+    type: string
+    default: "1"
+    enum:
+      - label:
+          en: One
+          fr: Un
+        value: "1"
+      - label:
+          en: Two
+          fr: Deux
+        value: "2"
+      - label:
+          en: Three
+          fr: Trois
+        value: "3"
+    description:
+      en: The number of columns in the section.
+      fr: Le nombre de colonnes dans la section.

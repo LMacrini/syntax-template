@@ -1,12 +1,12 @@
 title: 
   en: Button
-  fr: Button
+  fr: Bouton
 description: 
-  en: Button
-  fr: Button
+  en: A simple button
+  fr: Un bouton simple
 label:
   en: Button
-  fr: Button
+  fr: Bouton
 # assets:
 #   Screenshot.png:
 #     title: 
@@ -15,3 +15,22 @@ label:
 
 elements:
   title:
+    en: Add a link to the settings
+    fr: Ajoutez un lien au paramètres
+
+properties:
+  type:
+    label:
+      en: type
+      fr: type
+    type: string
+    default: primary
+    enum:
+      - label:
+          en: Primary
+          fr: Primaire
+        value: primary
+      - label:
+          en: Secondary
+          fr: Secondaire
+        value: secondary

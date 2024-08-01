@@ -21,7 +21,9 @@ function EmptyButton( props ) {
 }
 
 export default function Button( props ) {
-    console.log(props);
     const { block: { main: { body: { paragraphs, links } } } } = props;
     return <EmptyButton href={links[0]?.href} {...props}>{[links.map(link => link.label).join('\n').trim(), paragraphs.join('\n').trim()].join('\n')}</EmptyButton>
 }
+
+// Okay so i know this code looks impossible to read but trust me it's simple. Basically, if the docufolio has multiple links and paragraphs, the button will lead to the first link.
+// The button itself will also containt all of the text for each, but the links will be first. See? simple.
