@@ -10,6 +10,7 @@ const variantStyles = {
 
 export default function Button( props ) {
   const variant = 'primary'
+  let className = ''
   className = clsx(variantStyles[variant], className)
 
   return typeof props.href === 'undefined' ? (
