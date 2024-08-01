@@ -1,0 +1,17 @@
+title: 
+  en: Button
+  fr: Button
+description: 
+  en: Button
+  fr: Button
+label:
+  en: Button
+  fr: Button
+# assets:
+#   Screenshot.png:
+#     title: 
+#       en: Screenshot Description
+#       fr: Description de la capture d'écran
+
+elements:
+  title:
