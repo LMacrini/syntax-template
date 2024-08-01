@@ -22,7 +22,7 @@ properties:
       en: type
       fr: type
     type: string
-    default: primary
+    default: Primary
     enum:
       - label:
           en: Primary
@@ -40,7 +40,6 @@ properties:
       en: URL
       fr: URL
     type: string
-    default: undefined
     description:
       en: The link where the button sends
       fr: Le lien où envoie le bouton

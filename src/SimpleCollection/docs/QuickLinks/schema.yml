@@ -1,0 +1,14 @@
+title:
+  en: QuickLinks
+  fr: QuickLinks
+description:
+  en: Cards
+  fr: Des cartes
+label:
+  en: QuickLinks
+  fr: QuickLinks
+
+elements:
+  _raw:
+    en: Take QuickLink subsections and renders them
+    fr: Prends des sous-sections QuickLink et les affiche

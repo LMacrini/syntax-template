@@ -1,0 +1,41 @@
+title:
+  en: QuickLink
+  fr: QuickLink
+description:
+  en: A card
+  fr: Une carte
+label:
+  en: QuickLink
+  fr: QuickLink
+
+elements:
+  title:
+  text:
+
+properties:
+  icon:
+    label:
+      en: Icon
+      fr: Icône
+    type: string
+    default: Installation
+    enum:
+      - label:
+          en: Installation
+          fr: Installation
+        value: installation
+      - label:
+          en: Presets
+          fr: Présélection
+        value: presets
+      - label:
+          en: Plugins
+          fr: Plugins
+        value: plugins
+      - label:
+          en: Theming
+          fr: Thèmes
+        value: theming
+    description:
+      en: Icon of the card
+      fr: Icône de la carte
