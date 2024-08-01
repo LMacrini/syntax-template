@@ -1,12 +1,12 @@
 title: 
   en: Callout
-  fr: Callout
+  fr: Appel
 description: 
   en: Callout
-  fr: Callout
+  fr: Appel
 label:
   en: Callout
-  fr: Callout
+  fr: Appel
 # assets:
 #   Screenshot.png:
 #     title: 
@@ -33,3 +33,6 @@ properties:
           en: warning
           fr: avertissement
         value: warning
+    description:
+      en: The type of callout
+      fr: Le type d'appel
