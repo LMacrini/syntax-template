@@ -15,3 +15,21 @@ label:
 
 elements:
   title:
+  text:
+
+properties:
+  type:
+    label:
+      en: type
+      fr: type
+    type: string
+    default: info
+    enum:
+      - label:
+          en: info
+          fr: info
+        value: info
+      - label:
+          en: warning
+          fr: avertissement
+        value: warning
