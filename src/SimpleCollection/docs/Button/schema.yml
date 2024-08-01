@@ -14,7 +14,7 @@ label:
 #       fr: Description de la capture d'écran
 
 elements:
-  title:
+  description:
     en: Add a link to the settings
     fr: Ajoutez un lien au paramètres
 
@@ -34,3 +34,6 @@ properties:
           en: Secondary
           fr: Secondaire
         value: secondary
+    description:
+      en: Controls the type of button
+      fr: Contrôle le type de bouton
