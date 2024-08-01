@@ -22,7 +22,7 @@ properties:
       en: type
       fr: type
     type: string
-    default: Primary
+    default: primary
     enum:
       - label:
           en: Primary
