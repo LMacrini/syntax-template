@@ -1,3 +1,4 @@
+import React from 'react'
 import { DarkMode, Gradient, LightMode } from '../../Icon'
 
 export function ThemingIcon({ id, color }) {
