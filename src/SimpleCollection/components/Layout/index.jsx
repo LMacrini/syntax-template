@@ -39,7 +39,7 @@ import DocsHeader from '../DocsHeader';
 }
 
 export default function Layout(props) {
-    const { page, header, footer, body, leftpanel, rightpanel, website } = props;
+    const { page, header, footer, body, leftPanel, rightPanel, website } = props;
 
     return (
         <div className="flex w-full flex-col">
@@ -51,7 +51,7 @@ export default function Layout(props) {
                 <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
                 <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
                 <div className="sticky top-[4.75rem] -ml-0.5 h-[calc(100vh-4.75rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
-                    {leftpanel}
+                    {leftPanel}
                 </div>
                 </div>
                 <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-16">
@@ -62,7 +62,7 @@ export default function Layout(props) {
                     {footer}
                 </div>
                 {/* <TableOfContents tableOfContents={tableOfContents} /> */}
-                {rightpanel}
+                {rightPanel}
             </div>
         </div>
     )
