@@ -3,6 +3,7 @@ import React from 'react'
 import { Icon, icons } from "../Icon"
 
 export default function QuickLink({ block }) {
+    console.log(block)
     const { main: { header: { title }, body: { paragraphs } } } = block;
     let { icon, href } = block.getBlockProperties();
     if (!(icon in icons)) {
