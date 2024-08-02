@@ -14,13 +14,14 @@ label:
 #       fr: Description de la capture d'écran
 
 elements:
+  title:
 
 properties:
   left_panel:
     label:
       en: Left panel
       fr: Panneau de gauche
-    type: string
+    type: boolean
     default: true
     enum:
       - label:
