@@ -1,7 +1,9 @@
-title: LeftPanel
+title: 
+  en: Left Panel
+  fr: Panneau de gauche
 description:
   en: Acts as a navigation bar
   fr: Agit comme une barre de navigation
 label:
-  en: LeftPanel
+  en: Left Panel
   fr: Panneau de gauche
