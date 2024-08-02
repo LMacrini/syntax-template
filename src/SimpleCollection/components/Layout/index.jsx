@@ -1,5 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 
+import Prose from '../Prose';
+import DocsHeader from '../DocsHeader';
+
 (props) => {
     const { page, header, footer, body, leftPanel, rightPanel } = props;
 
@@ -36,8 +39,7 @@ import React, { useRef, useState, useEffect } from 'react';
 }
 
 export default function Layout(props) {
-    const { page, header, footer, body, leftpanel, rightpanel } = props;
-    console.log(page);
+    const { page, header, footer, body, leftpanel, rightpanel, website } = props;
 
     return (
         <div className="flex w-full flex-col">
@@ -54,9 +56,8 @@ export default function Layout(props) {
                 </div>
                 <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-16">
                     <article>
-                        {/* <DocsHeader title={title} />
-                        <Prose>{children}</Prose> */}
-                        {body}
+                        <DocsHeader page={page} />
+                        <Prose>{body}</Prose>
                     </article>
                     {footer}
                 </div>
