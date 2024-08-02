@@ -20,7 +20,7 @@ properties:
     label:
       en: Left panel
       fr: Panneau de gauche
-    type: boolean
+    type: string
     default: true
     enum:
       - label:
