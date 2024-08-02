@@ -101,9 +101,9 @@ function Header(props) {
 
 export default (props) => {
   const { block } = props;
-  
 
+  return (
   <div className="flex w-full flex-col">
-    <Header {...props} />
-  </div>
+    <Header {...props}/>
+  </div>)
 }
