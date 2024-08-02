@@ -8,7 +8,7 @@ import { PresetsIcon } from './icons/PresetsIcon'
 import { ThemingIcon } from './icons/ThemingIcon'
 import { WarningIcon } from './icons/WarningIcon'
 
-const icons = {
+export const icons = {
   installation: InstallationIcon,
   presets: PresetsIcon,
   plugins: PluginsIcon,
