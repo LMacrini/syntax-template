@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
+import LeftPanel from '../LeftPanel';
+
 function GitHubIcon(props) {
     return (
       <svg aria-hidden="true" viewBox="0 0 16 16" {...props}>
@@ -9,7 +11,7 @@ function GitHubIcon(props) {
     )
   }
 
-function Header(props) {
+export default function Header(props) {
     if (props === undefined) {
       return null;
     }
@@ -97,13 +99,4 @@ function Header(props) {
         </div>
       </header>
       );
-}
-
-export default (props) => {
-  const { block } = props;
-
-  return (
-  <div className="flex w-full flex-col">
-    <Header {...props}/>
-  </div>)
 }
