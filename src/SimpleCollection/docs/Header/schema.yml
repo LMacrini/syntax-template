@@ -23,15 +23,15 @@ properties:
       fr: Panneau de gauche
     type: boolean
     default: true
-    enum:
-      - label:
-          en: True
-          fr: Vrai
-        value: true
-      - label:
-          en: False
-          fr: Faux
-        value: false
     description:
       en: Whether or not to display the left panel
       fr: Affichage du panneau de gauche
+  right_panel:
+    label:
+      en: Right panel
+      fr: Panneau de droite
+    type: boolean
+    default: false
+    description:
+      en: Whether or not to display the right panel
+      fr: Affichage du panneau de droite
