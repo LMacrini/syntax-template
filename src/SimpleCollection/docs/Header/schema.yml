@@ -1,12 +1,12 @@
 title: 
   en: Header
-  fr: Header
+  fr: Entête
 description: 
-  en: Header
-  fr: Header
+  en: The header of the page
+  fr: L'entête de la page
 label:
   en: Header
-  fr: Header
+  fr: Entête
 # assets:
 #   Screenshot.png:
 #     title: 
@@ -14,4 +14,23 @@ label:
 #       fr: Description de la capture d'écran
 
 elements:
-  title:
+
+properties:
+  left_panel:
+    label:
+      en: Left panel
+      fr: Panneau de gauche
+    type: boolean
+    default: true
+    enum:
+      - label:
+          en: True
+          fr: Vrai
+        value: true
+      - label:
+          en: False
+          fr: Faux
+        value: false
+    description:
+      en: Whether or not to display the left panel
+      fr: Affichage du panneau de gauche

@@ -9,7 +9,7 @@ function GitHubIcon(props) {
     )
   }
 
-export default (props) => {
+function Header(props) {
     if (props === undefined) {
       return null;
     }
@@ -97,4 +97,13 @@ export default (props) => {
         </div>
       </header>
       );
+}
+
+export default (props) => {
+  const { block } = props;
+  
+
+  <div className="flex w-full flex-col">
+    <Header {...props} />
+  </div>
 }
