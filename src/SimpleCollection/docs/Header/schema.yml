@@ -31,7 +31,7 @@ properties:
       en: Right panel
       fr: Panneau de droite
     type: boolean
-    default: false
+    default: true
     description:
       en: Whether or not to display the right panel
       fr: Affichage du panneau de droite
