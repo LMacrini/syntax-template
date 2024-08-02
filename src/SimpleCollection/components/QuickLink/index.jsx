@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Icon, icons } from "./Icon"
+import { Icon, icons } from "../Icon"
 
 export default function QuickLink({ block }) {
     const { main: { header: { title }, body: { paragraphs } } } = block;

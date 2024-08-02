@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 
-import { Icon } from './Icon'
+import { Icon } from '../Icon'
 
 const styles = {
   info: {
