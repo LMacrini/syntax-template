@@ -35,6 +35,14 @@ properties:
           en: Theming
           fr: Thèmes
         value: theming
+      - label:
+          en: Lightbulb
+          fr: Ampoule
+        value: lightbulb
+      - label:
+          en: Warning
+          fr: Avertissement
+        value: warning
     description:
       en: Icon of the card
       fr: Icône de la carte
