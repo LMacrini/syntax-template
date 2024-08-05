@@ -5,11 +5,12 @@ export default function ({ dividerType }) {
     let body = null;
 
     if (dividerType === 'hr') {
-        body = (
-            <div className={`w-[896px] mx-auto flex justify-center mt-6 mb-4 pt-2`} contentEditable={false}>
-                <hr className={`w-[896px]`}></hr>
-            </div>
-        );
+        // body = (
+        //     <div className={`w-[896px] mx-auto flex justify-center mt-6 mb-4 pt-2`} contentEditable={false}>
+        //         <hr className={`w-[896px]`}></hr>
+        //     </div>
+        // );
+        body = <hr style={{ marginTop: '3em', marginBottom: '3em' }}/>
     } else {
         body = (
             <div
