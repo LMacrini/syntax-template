@@ -8,10 +8,11 @@ import QuickLink from './components/QuickLink';
 import Layout from './components/Layout';
 import LeftPanel from './components/LeftPanel';
 import RightPanel from './components/RightPanel';
+import Section from './components/Section';
 
 // import CSS
 import './index.css';
 
-export default { Block, Header, Callout, Button, QuickLinks, QuickLink, LeftPanel, RightPanel };
+export default { Block, Header, Callout, Button, QuickLinks, QuickLink, LeftPanel, RightPanel, Section };
 
 export const site = { Layout };
