@@ -51,9 +51,6 @@ properties:
       en: URL
       fr: URL
     type: string
-    default:
-      en: Optional
-      fr: Optionnel
     description:
       en: URL of the card
       fr: URL de la carte
