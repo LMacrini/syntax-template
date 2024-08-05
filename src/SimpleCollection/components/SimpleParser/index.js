@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from "@uniwebcms/module-sdk"
 
 export default function Parser({text}) {
-    console.log(text)
     switch (text.type) {
         case 'paragraph':
-            return <p>{text.content.map((part) => {
+            return <p>{text.content?.map((part) => {
                 const { marks } = part;
                 if (marks === undefined) {
                     return part.text
