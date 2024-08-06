@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Divider from './Divider';
 import Image from './Image';
 import styles from '../Section.module.scss';
 import Warning from './Warning';
 import { stripTags } from '@uniwebcms/module-sdk';
+import { Highlight } from 'prism-react-renderer'
+import clsx from 'clsx'
 
 const Render = function (props) {
     const { block, content, page } = props;
@@ -13,7 +15,7 @@ const Render = function (props) {
     if (!content || !content.length) return null;
 
     return content.map((block, index) => {
-        const { type, content } = block;
+        const { type, content, language = '' } = block;
 
         switch (type) {
             case 'paragraph':
@@ -69,11 +71,32 @@ const Render = function (props) {
                 );
 
             case 'codeBlock':
+                console.log(language)
                 return (
-                    <pre key={index} className={`whitespace-pre-wrap bg-[rgba(0,0,0,0.05)] p-5` + ` ${styles.Block}`}>
-                        <code dangerouslySetInnerHTML={{ __html: content }}></code>
-                    </pre>
-                );
+                    <Highlight
+                      code={content.trimEnd()}
+                      language={language}
+                      theme={{ plain: {}, styles: [] }}
+                    >
+                      {({ className, style, tokens, getTokenProps }) => {
+                          console.log(tokens.map(line => line.filter(token => !token.empty).map(token => getTokenProps({token}))))
+                          return <pre className={clsx('rounded-xl bg-slate-900 shadow-lg dark:bg-slate-800/60 dark:shadow-none dark:ring-1 dark:ring-slate-300/10 text-base p-[12px] pl-[16px] pr-[16px]', className)} style={style}>
+                          <code>
+                            {tokens.map((line, lineIndex) => (
+                              <Fragment key={lineIndex}>
+                                {line
+                                  .filter((token) => !token.empty)
+                                  .map((token, tokenIndex) => (
+                                    <span key={tokenIndex} {...getTokenProps({ token })} />
+                                  ))}
+                                {'\n'}
+                              </Fragment>
+                            ))}
+                          </code>
+                        </pre>
+                      }}
+                    </Highlight>
+                  )
         }
     });
 };

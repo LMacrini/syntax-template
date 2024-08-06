@@ -6147,6 +6147,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/prismjs", [\
+      ["npm:1.26.4", {\
+        "packageLocation": "./.yarn/cache/@types-prismjs-npm-1.26.4-dfd1a816d1-fcf7072c56.zip/node_modules/@types/prismjs/",\
+        "packageDependencies": [\
+          ["@types/prismjs", "npm:1.26.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/prop-types", [\
       ["npm:15.7.5", {\
         "packageLocation": "./.yarn/cache/@types-prop-types-npm-15.7.5-2aa48aa177-5b43b8b154.zip/node_modules/@types/prop-types/",\
@@ -15268,11 +15277,33 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
+      ["npm:2.3.1", {\
+        "packageLocation": "./.yarn/cache/prism-react-renderer-npm-2.3.1-79c80bb723-8ef6b3b667.zip/node_modules/prism-react-renderer/",\
+        "packageDependencies": [\
+          ["prism-react-renderer", "npm:2.3.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
       ["virtual:ab5379ac4c0ec8cc8e88451fa62eb4eb013b5d3b2e0ed5537271410f220e66fe43c0c30da4fa75f8c7c220fdb3821c05185da003964b7f512e59c58253f93251#npm:1.3.5", {\
         "packageLocation": "./.yarn/__virtual__/prism-react-renderer-virtual-0c88ca87f7/0/cache/prism-react-renderer-npm-1.3.5-5891d32b72-6deeef1bf4.zip/node_modules/prism-react-renderer/",\
         "packageDependencies": [\
           ["prism-react-renderer", "virtual:ab5379ac4c0ec8cc8e88451fa62eb4eb013b5d3b2e0ed5537271410f220e66fe43c0c30da4fa75f8c7c220fdb3821c05185da003964b7f512e59c58253f93251#npm:1.3.5"],\
           ["@types/react", "npm:18.2.17"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:d929ae42cb26a9a30f37225e3d83e632dddd0d18ee93a78e943cde9c8ee349603430b731830395da160d9ad77a45370b99ba10b2dfe6e9a54588c351f2f3ed05#npm:2.3.1", {\
+        "packageLocation": "./.yarn/__virtual__/prism-react-renderer-virtual-8c86e58e90/0/cache/prism-react-renderer-npm-2.3.1-79c80bb723-8ef6b3b667.zip/node_modules/prism-react-renderer/",\
+        "packageDependencies": [\
+          ["prism-react-renderer", "virtual:d929ae42cb26a9a30f37225e3d83e632dddd0d18ee93a78e943cde9c8ee349603430b731830395da160d9ad77a45370b99ba10b2dfe6e9a54588c351f2f3ed05#npm:2.3.1"],\
+          ["@types/prismjs", "npm:1.26.4"],\
+          ["@types/react", null],\
+          ["clsx", "npm:2.1.1"],\
           ["react", "npm:18.2.0"]\
         ],\
         "packagePeers": [\
@@ -17081,6 +17112,7 @@ const RAW_RUNTIME_STATE =
           ["@tailwindcss/line-clamp", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:0.4.4"],\
           ["@uniwebcms/module-sdk", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:1.22.0"],\
           ["clsx", "npm:2.1.1"],\
+          ["prism-react-renderer", "virtual:d929ae42cb26a9a30f37225e3d83e632dddd0d18ee93a78e943cde9c8ee349603430b731830395da160d9ad77a45370b99ba10b2dfe6e9a54588c351f2f3ed05#npm:2.3.1"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:18.2.0"],\
           ["react-icons", "virtual:934880f2987c833c1c0f2f09aee2339e1cb6de9c8881ff70ecfc45e4d9c4e9ed1141dbbbcc4fa49a3363f8ded6dc6ffa7335d93902eb71af8db39b8f788afbfd#npm:4.12.0"],\

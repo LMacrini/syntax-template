@@ -48,6 +48,28 @@ const buildTextNode = (content) => {
     return data;
 };
 
+function parseCodeBlock(input = '') {
+    if (input.startsWith("```")) {
+        input = input.slice(3);
+
+        const splitIndex = input.indexOf('\n');
+        
+        if (splitIndex !== -1) {
+            const language = input.substring(0, splitIndex);
+            const content = input.substring(splitIndex + 1);
+            return {
+                type: "codeBlock",
+                language,
+                content,
+            }
+        }
+    }
+    return {
+        type: "codeBlock",
+        content: input,
+    }
+}
+
 export const buildArticleBlocks = (articleContent) => {
     const { content: docContent } = articleContent;
 
@@ -99,6 +121,7 @@ export const buildArticleBlocks = (articleContent) => {
                         }),
                     };
                 case 'codeBlock':
+                    return parseCodeBlock(content[0].text)
                 case 'WarningBlock':
                     return {
                         type: type === 'WarningBlock' ? 'warning' : 'codeBlock',
