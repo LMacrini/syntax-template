@@ -71,16 +71,14 @@ const Render = function (props) {
                 );
 
             case 'codeBlock':
-                console.log(language)
                 return (
                     <Highlight
                       code={content.trimEnd()}
                       language={language}
                       theme={{ plain: {}, styles: [] }}
                     >
-                      {({ className, style, tokens, getTokenProps }) => {
-                          console.log(tokens.map(line => line.filter(token => !token.empty).map(token => getTokenProps({token}))))
-                          return <pre className={clsx('rounded-xl bg-slate-900 shadow-lg dark:bg-slate-800/60 dark:shadow-none dark:ring-1 dark:ring-slate-300/10 text-base p-[12px] pl-[16px] pr-[16px]', className)} style={style}>
+                      {({ className, style, tokens, getTokenProps }) => (
+                          <pre className={clsx('rounded-xl bg-slate-900 shadow-lg dark:bg-slate-800/60 dark:shadow-none dark:ring-1 dark:ring-slate-300/10 text-base p-[12px] pl-[16px] pr-[16px]', className)} style={style}>
                           <code>
                             {tokens.map((line, lineIndex) => (
                               <Fragment key={lineIndex}>
@@ -94,7 +92,7 @@ const Render = function (props) {
                             ))}
                           </code>
                         </pre>
-                      }}
+                      )}
                     </Highlight>
                   )
         }
