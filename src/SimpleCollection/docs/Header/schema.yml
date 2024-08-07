@@ -18,12 +18,12 @@ properties:
       en: image mode
       fr: mode de l'image
     type: string
-    default: null
+    default: "null"
     enum:
       - label:
           en: None
           fr: Aucune
-        value: null
+        value: "null"
       - label:
           en: Image
           fr: Image
