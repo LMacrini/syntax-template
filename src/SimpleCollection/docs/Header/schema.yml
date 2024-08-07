@@ -12,3 +12,23 @@ label:
 #     title: 
 #       en: Screenshot Description
 #       fr: Description de la capture d'écran
+properties:
+  mode:
+    label:
+      en: image mode
+      fr: mode de l'image
+    type: string
+    default: null
+    enum:
+      - label:
+          en: None
+          fr: Aucune
+        value: null
+      - label:
+          en: Image
+          fr: Image
+        value: image
+      - label:
+          en: Icon
+          fr: Icône
+        value: icon
