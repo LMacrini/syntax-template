@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Divider from './Divider';
 import Image from './Image';
+import Video from './Video';
 import styles from '../Section.module.scss';
 import Warning from './Warning';
 import { stripTags } from '@uniwebcms/module-sdk';
@@ -35,6 +36,8 @@ const Render = function (props) {
                 );
             case 'image':
                 return <Image key={index} {...block} page={page} />;
+            case 'video':
+                return <Video key={index} {...block} />
             case 'warning':
                 return <Warning key={index} {...block} />;
             case 'divider':
