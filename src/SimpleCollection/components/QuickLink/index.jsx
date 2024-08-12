@@ -3,9 +3,9 @@ import { Link } from "@uniwebcms/module-sdk"
 
 import { Icon, icons } from "../Icon"
 
-export default function QuickLink({ block }) {
-    const { main: { header: { title }, body: { paragraphs } } } = block;
-    let { icon, href } = block.getBlockProperties();
+export default function QuickLink(props) {
+    const { block: { main: { header: { title }, body: { paragraphs } } } } = props;
+    let { icon, href } = props.block.getBlockProperties();
     if (!(icon in icons)) {
         icon = 'installation';
     }

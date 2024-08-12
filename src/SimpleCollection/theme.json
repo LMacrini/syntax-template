@@ -1,0 +1,24 @@
+{
+    "light" : {
+        "text-color" : "rgb(51, 65, 85)",
+        "bg-color" : "rgba(var(--neutral-50))",
+        "bg2-color": "rgba(248, 250, 252)",
+        "heading-color" : "rgba(var(--neutral-900))",
+        "link-color" : "rgba(var(--neutral-900))",
+        "icon-color" : "rgba(var(--neutral-900))"
+    },
+    "medium" : {
+        "text-color" : "rgba(var(--neutral-900))",
+        "bg-color" : "rgba(var(--neutral-900))",
+        "heading-color" : "rgba(var(--neutral-900))",
+        "link-color" : "rgba(var(--neutral-900))",
+        "icon-color" : "rgba(var(--neutral-900))"
+    },
+    "dark" : {
+        "text-color" : "rgba(var(--neutral-900))",
+        "bg-color" : "rgba(var(--neutral-900))",
+        "heading-color" : "rgba(var(--neutral-900))",
+        "link-color" : "rgba(var(--neutral-900))",
+        "icon-color" : "rgba(var(--neutral-900))"
+    }
+}

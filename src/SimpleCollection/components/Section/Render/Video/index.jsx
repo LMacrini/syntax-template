@@ -32,40 +32,124 @@ async function getVideoThumbnail(url) {
 	return null;
 }
 
+function VideoOverlay({ videos, children }) {
+	return (
+		<>
+			<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+				<div className="flex w-full max-w-6xl mx-auto bg-white shadow-lg">
+					<div className="flex-1 p-4">
+						<VideoComponent video={activeVideo} />
+					</div>
+					<div className="w-1/4 p-4 bg-gray-100">
+						<h2 className="mb-4 text-lg font-bold">Other Videos</h2>
+						{videos.map((video) => (
+							<div
+								key={video.id}
+								className="mb-4 cursor-pointer"
+								onClick={() => setActiveVideo(video)}
+							>
+								<VideoComponent video={video} />
+							</div>
+						))}
+					</div>
+				</div>
+				<button
+					className="absolute top-4 right-4 text-white"
+					onClick={closeOverlay}
+				>
+					Close
+				</button>
+			</div>
+
+			<div className="grid grid-cols-3 gap-4">
+				{videos.map((video) => (
+					<div
+						key={video.id}
+						className="cursor-pointer"
+						onClick={() => openOverlay(video)}
+					>
+						<VideoComponent video={video} />
+					</div>
+				))}
+			</div>
+		</>
+	);
+}
+
 export default function Video(video) {
 	const [miniPlayer, setMiniPlayer] = useState(false);
+	const [overlay, setOverlay] = useState(false);
+
 	const toggleMiniPlayer = () => {
+		setOverlay(false);
 		setMiniPlayer(!miniPlayer);
 	};
-	const [thumbnail, setThumbnail] = useState(
-		"https://vectorified.com/images/loading-icon-png-20.png"
-	);
+
+	const toggleOverlay = () => {
+		setMiniPlayer(false);
+		setOverlay(!overlay);
+	};
+
+	const [thumbnail, setThumbnail] = useState(null);
 
 	const { src } = video;
 
 	const playerClasses = `
-    ${miniPlayer && "fixed bottom-4 right-4 w-64 h-36 z-50"}
+    ${miniPlayer && "fixed bottom-4 right-4 w-64 h-36 z-50"} 
+	${overlay && "flex w-full max-w-6xl mx-auto bg-white shadow-lg"}
     `;
+
+	const outerClasses = `
+	${
+		overlay &&
+		"fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+	}
+	`;
 
 	useEffect(() => {
 		async function fetchThumbnail() {
 			const thumb = await getVideoThumbnail(src);
-			if (thumb) {
-				setThumbnail(thumb);
-			}
+			setThumbnail(thumb);
 		}
 		fetchThumbnail();
 	}, [src]);
 
+	const Buttons = () => (
+		<>
+			<button onClick={toggleMiniPlayer}>Mini Player</button>
+			<br />
+			<button onClick={toggleOverlay}>Overlay</button>
+		</>
+	);
+
+	const FakeBlock = () => (
+		<div className="bg-black" style={{ paddingBottom: "56.25%" }} />
+	);
+
 	return (
 		<>
-			<div className={playerClasses}>
-				<Media media={video} thumbnail={{ url: thumbnail }} />
+			<div
+				className={outerClasses}
+				onClick={(event) => {
+					if (event.target === event.currentTarget) {
+						toggleOverlay();
+					}
+				}}
+			>
+				<div className={playerClasses}>
+					<div className={overlay && "flex-1 p-4"}>
+						<Media
+							className="mt-0"
+							media={video}
+							{...(thumbnail && { thumbnail: { url: thumbnail } })}
+						/>
+						{overlay && <Buttons />}
+					</div>
+				</div>
 			</div>
-			{miniPlayer && (
-				<div className="bg-black" style={{ paddingBottom: "56.25%" }} />
-			)}
-			<button onClick={toggleMiniPlayer}>Mini Player</button>
+			<div>{(overlay || miniPlayer) && <FakeBlock />}</div>
+			{<Buttons />}
+			{overlay && <div className="grid grid-cols-3 gap-4"></div>}
 		</>
 	);
 }

@@ -98,6 +98,12 @@ export const buildArticleBlocks = (articleContent) => {
                         type: 'image',
                         ...attrs,
                     };
+                case 'Video':
+                    return {
+                        type: 'video',
+                        src: block.src,
+                        ...attrs,
+                    }
                 case 'heading':
                     const { level, id, textAlign } = attrs;
                     return {

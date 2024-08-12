@@ -14,10 +14,15 @@
         "@tailwindcss/line-clamp": "^0.4.4",
         "@uniwebcms/module-sdk": "^1.22.0",
         "clsx": "^2.1.1",
+        "flexsearch": "^0.7.43",
+        "flowbite-react": "^0.10.1",
         "prism-react-renderer": "^2.3.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^4.8.0",
         "tailwindcss": "^3.3.3"
+    },
+    "devDependencies": {
+        "@tailwindcss/typography": "^0.5.14"
     }
 }
