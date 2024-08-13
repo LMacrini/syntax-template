@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Media } from "@uniwebcms/module-sdk";
+import { FaCompress, FaExpand } from "react-icons/fa";
+import { Media, Image } from "@uniwebcms/module-sdk";
+import clsx from "clsx";
+
+function getVideos(sections) {
+	return sections
+		.map((section) =>
+			section.content.content?.filter((object) => object.type === "Video")
+		)
+		.flat()
+		.map((video) => video.attrs);
+}
 
 async function getVideoThumbnail(url) {
 	const youtubeRegex =
@@ -77,8 +88,28 @@ function VideoOverlay({ videos, children }) {
 }
 
 export default function Video(video) {
+	const { page } = video;
+
+	const profile = page.getPageProfile();
+	const sections = page.blockGroups.body;
+	const videos = getVideos(sections);
+
+	const [src, setSrc] = useState(video.src);
+	const [currentVideo, setCurrentVideo] = useState(video);
 	const [miniPlayer, setMiniPlayer] = useState(false);
 	const [overlay, setOverlay] = useState(false);
+
+	const resetVideo = () => {
+		if (video !== currentVideo) {
+			setCurrentVideo(video);
+		}
+	};
+
+	const changeVideo = (newVideo) => {
+		return () => {
+			setCurrentVideo(newVideo);
+		};
+	};
 
 	const toggleMiniPlayer = () => {
 		setOverlay(false);
@@ -91,8 +122,7 @@ export default function Video(video) {
 	};
 
 	const [thumbnail, setThumbnail] = useState(null);
-
-	const { src } = video;
+	const [thumbnails, setThumbnails] = useState(Array(videos.length).fill(null));
 
 	const playerClasses = `
     ${miniPlayer && "fixed bottom-4 right-4 w-64 h-36 z-50"} 
@@ -108,18 +138,43 @@ export default function Video(video) {
 
 	useEffect(() => {
 		async function fetchThumbnail() {
-			const thumb = await getVideoThumbnail(src);
+			const thumb = await getVideoThumbnail(currentVideo.src);
 			setThumbnail(thumb);
 		}
+		setSrc(currentVideo.src)
 		fetchThumbnail();
-	}, [src]);
+	}, [currentVideo]);
+
+	useEffect(() => {
+		async function fetchThumbnails() {
+			const array = await Promise.all(
+				videos.map(async ({ src }) => {
+					const thumb = await getVideoThumbnail(src);
+					return thumb;
+				})
+			);
+			setThumbnails(array);
+		}
+		fetchThumbnails();
+	}, []);
 
 	const Buttons = () => (
-		<>
-			<button onClick={toggleMiniPlayer}>Mini Player</button>
-			<br />
-			<button onClick={toggleOverlay}>Overlay</button>
-		</>
+		<div className="flex space-x-4 mt-4">
+			<button
+				onClick={toggleMiniPlayer}
+				className="flex items-center px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600"
+			>
+				<FaCompress className="mr-2" />
+				Mini Player
+			</button>
+			<button
+				onClick={toggleOverlay}
+				className="flex items-center px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-600"
+			>
+				<FaExpand className="mr-2" />
+				Overlay
+			</button>
+		</div>
 	);
 
 	const FakeBlock = () => (
@@ -137,19 +192,53 @@ export default function Video(video) {
 				}}
 			>
 				<div className={playerClasses}>
-					<div className={overlay && "flex-1 p-4"}>
+					{/* Main Video Area */}
+					<div className={`flex-1 p-4 block`}>
 						<Media
 							className="mt-0"
-							media={video}
+							media={currentVideo}
 							{...(thumbnail && { thumbnail: { url: thumbnail } })}
 						/>
-						{overlay && <Buttons />}
 					</div>
+
+					{/* Thumbnail Grid */}
+					{overlay && (
+						<div className="w-1/4 p-4 overflow-y-auto bg-gray-800 flex items-center justify-center">
+							<div className="grid grid-cols-1 gap-4">
+								{videos.map((video, index) => {
+									const currentThumbnail = thumbnails[index];
+									return (
+										<div
+											key={index}
+											className={`cursor-pointer p-2 rounded-lg transition-transform transform hover:scale-105 ${
+												video === currentVideo
+													? "border-2 border-indigo-500"
+													: ""
+											}`}
+											onClick={changeVideo(video)}
+										>
+											<Image className="w-full h-auto object-contain rounded-md m-2"
+												{...{profile, url: currentThumbnail}}
+											/>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+					)}
+
+					{/* Additional Buttons */}
+					{overlay && (
+						<div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+							<Buttons />
+						</div>
+					)}
 				</div>
 			</div>
-			<div>{(overlay || miniPlayer) && <FakeBlock />}</div>
-			{<Buttons />}
-			{overlay && <div className="grid grid-cols-3 gap-4"></div>}
+
+			{/* Conditional Rendering of FakeBlock and Buttons */}
+			{(overlay || miniPlayer) && <FakeBlock />}
+			{!overlay && <Buttons />}
 		</>
 	);
 }

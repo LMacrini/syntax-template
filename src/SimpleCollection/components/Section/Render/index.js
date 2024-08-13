@@ -37,7 +37,7 @@ const Render = function (props) {
             case 'image':
                 return <Image key={index} {...block} page={page} />;
             case 'video':
-                return <Video key={index} {...block} />
+                return <Video key={index} {...block} page={page} />
             case 'warning':
                 return <Warning key={index} {...block} />;
             case 'divider':

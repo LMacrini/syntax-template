@@ -1,21 +1,23 @@
-import styles from './Section.module.scss';
-import React from 'react';
-import Render from './Render';
-import { buildArticleBlocks } from './parser';
+import styles from "./Section.module.scss";
+import React from "react";
+import Render from "./Render";
+import { buildArticleBlocks } from "./parser";
 
 export default function Section(props) {
-    const { website, block } = props;
-    const { content } = block;
+	const { website, block } = props;
+	const { content } = block;
 
-    if (!content || !Object.keys(content).length) return null;
+	if (!content || !Object.keys(content).length) return null;
 
-    const parsedContent = buildArticleBlocks(website.parseLinksInArticle(content));
+	const parsedContent = buildArticleBlocks(
+		website.parseLinksInArticle(content)
+	);
 
-    return (
-        <div className={`bg-white max-w-full relative flex flex-col`}>
-            <div className={`mx-auto w-full` + ` ${styles.SectionWrapper}`}>
-                <Render {...props} content={parsedContent}></Render>
-            </div>
-        </div>
-    );
+	return (
+		<div className={`bg-white max-w-full relative flex flex-col`}>
+			<div className={`mx-auto w-full` + ` ${styles.SectionWrapper}`}>
+				<Render {...props} content={parsedContent} />
+			</div>
+		</div>
+	);
 }
