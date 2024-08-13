@@ -4,12 +4,13 @@ import { Media, Image } from "@uniwebcms/module-sdk";
 import clsx from "clsx";
 
 function getVideos(sections) {
-	return sections
+	const videos = sections
 		.map((section) =>
 			section.content.content?.filter((object) => object.type === "Video")
 		)
 		.flat()
 		.map((video) => video.attrs);
+	return videos;
 }
 
 async function getVideoThumbnail(url) {
@@ -43,50 +44,6 @@ async function getVideoThumbnail(url) {
 	return null;
 }
 
-function VideoOverlay({ videos, children }) {
-	return (
-		<>
-			<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-				<div className="flex w-full max-w-6xl mx-auto bg-white shadow-lg">
-					<div className="flex-1 p-4">
-						<VideoComponent video={activeVideo} />
-					</div>
-					<div className="w-1/4 p-4 bg-gray-100">
-						<h2 className="mb-4 text-lg font-bold">Other Videos</h2>
-						{videos.map((video) => (
-							<div
-								key={video.id}
-								className="mb-4 cursor-pointer"
-								onClick={() => setActiveVideo(video)}
-							>
-								<VideoComponent video={video} />
-							</div>
-						))}
-					</div>
-				</div>
-				<button
-					className="absolute top-4 right-4 text-white"
-					onClick={closeOverlay}
-				>
-					Close
-				</button>
-			</div>
-
-			<div className="grid grid-cols-3 gap-4">
-				{videos.map((video) => (
-					<div
-						key={video.id}
-						className="cursor-pointer"
-						onClick={() => openOverlay(video)}
-					>
-						<VideoComponent video={video} />
-					</div>
-				))}
-			</div>
-		</>
-	);
-}
-
 export default function Video(video) {
 	const { page } = video;
 
@@ -100,7 +57,7 @@ export default function Video(video) {
 	const [overlay, setOverlay] = useState(false);
 
 	const resetVideo = () => {
-		if (video !== currentVideo) {
+		if (video.src !== currentVideo.src) {
 			setCurrentVideo(video);
 		}
 	};
@@ -113,14 +70,21 @@ export default function Video(video) {
 
 	const toggleMiniPlayer = () => {
 		setOverlay(false);
+		if (miniPlayer) {
+			resetVideo();
+		}
 		setMiniPlayer(!miniPlayer);
 	};
 
 	const toggleOverlay = () => {
 		setMiniPlayer(false);
+		if (overlay) {
+			resetVideo();
+		}
 		setOverlay(!overlay);
 	};
 
+	const [ogThumbnail, setOgThumbnail] = useState(null);
 	const [thumbnail, setThumbnail] = useState(null);
 	const [thumbnails, setThumbnails] = useState(Array(videos.length).fill(null));
 
@@ -130,6 +94,7 @@ export default function Video(video) {
     `;
 
 	const outerClasses = `
+	${!overlay && "absolute inset-0 z-10"}
 	${
 		overlay &&
 		"fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
@@ -138,10 +103,18 @@ export default function Video(video) {
 
 	useEffect(() => {
 		async function fetchThumbnail() {
+			const thumb = await getVideoThumbnail(video.src);
+			setOgThumbnail(thumb);
+		}
+		fetchThumbnail();
+	}, []);
+
+	useEffect(() => {
+		async function fetchThumbnail() {
 			const thumb = await getVideoThumbnail(currentVideo.src);
 			setThumbnail(thumb);
 		}
-		setSrc(currentVideo.src)
+		setSrc(currentVideo.src);
 		fetchThumbnail();
 	}, [currentVideo]);
 
@@ -178,66 +151,73 @@ export default function Video(video) {
 	);
 
 	const FakeBlock = () => (
-		<div className="bg-black" style={{ paddingBottom: "56.25%" }} />
+		<Image
+			className="relative z-0 flex-1 p-4 block m-0"
+			{...{ profile, url: ogThumbnail }}
+		/>
 	);
 
 	return (
 		<>
-			<div
-				className={outerClasses}
-				onClick={(event) => {
-					if (event.target === event.currentTarget) {
-						toggleOverlay();
-					}
-				}}
-			>
-				<div className={playerClasses}>
-					{/* Main Video Area */}
-					<div className={`flex-1 p-4 block`}>
-						<Media
-							className="mt-0"
-							media={currentVideo}
-							{...(thumbnail && { thumbnail: { url: thumbnail } })}
-						/>
-					</div>
+			<div className="relative">
+				<div
+					className={outerClasses}
+					onClick={(event) => {
+						if (event.target === event.currentTarget) {
+							toggleOverlay();
+						}
+					}}
+				>
+					<div className={playerClasses}>
+						{/* Main Video Area */}
+						<div className={`flex-1 p-4 block`}>
+							<Media
+								// key={thumbnail}
+								className="mt-0"
+								media={currentVideo}
+								{...(thumbnail && { thumbnail: { url: thumbnail } })}
+							/>
+						</div>
 
-					{/* Thumbnail Grid */}
-					{overlay && (
-						<div className="w-1/4 p-4 overflow-y-auto bg-gray-800 flex items-center justify-center">
-							<div className="grid grid-cols-1 gap-4">
-								{videos.map((video, index) => {
-									const currentThumbnail = thumbnails[index];
-									return (
-										<div
-											key={index}
-											className={`cursor-pointer p-2 rounded-lg transition-transform transform hover:scale-105 ${
-												video === currentVideo
-													? "border-2 border-indigo-500"
-													: ""
-											}`}
-											onClick={changeVideo(video)}
-										>
-											<Image className="w-full h-auto object-contain rounded-md m-2"
-												{...{profile, url: currentThumbnail}}
-											/>
-										</div>
-									);
-								})}
+						{/* Thumbnail Grid */}
+						{overlay && (
+							<div className="w-1/4 p-4 overflow-y-auto bg-gray-800 flex items-center justify-center">
+								<div className="grid grid-cols-1 gap-4">
+									{videos.map((video, index) => {
+										const currentThumbnail = thumbnails[index];
+										return (
+											<div
+												key={index}
+												className={`cursor-pointer p-2 rounded-lg transition-transform transform hover:scale-105 ${
+													video === currentVideo
+														? "border-2 border-indigo-500"
+														: ""
+												}`}
+												onClick={changeVideo(video)}
+											>
+												<Image
+													className="w-full h-auto object-contain rounded-md m-2"
+													{...{ profile, url: currentThumbnail }}
+												/>
+											</div>
+										);
+									})}
+								</div>
 							</div>
-						</div>
-					)}
+						)}
 
-					{/* Additional Buttons */}
-					{overlay && (
-						<div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-							<Buttons />
-						</div>
-					)}
+						{/* Additional Buttons */}
+						{overlay && (
+							<div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+								<Buttons />
+							</div>
+						)}
+					</div>
 				</div>
-			</div>
 
-			{/* Conditional Rendering of FakeBlock and Buttons */}
-			{(overlay || miniPlayer) && <FakeBlock />}
+				{/* Conditional Rendering of FakeBlock and Buttons */}
+				{<FakeBlock />}
+			</div>
 			{!overlay && <Buttons />}
 		</>
 	);
