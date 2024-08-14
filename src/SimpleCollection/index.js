@@ -11,6 +11,7 @@ import RightPanel from "./components/RightPanel";
 import Section from "./components/Section";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
+import CodeBlock from "./components/CodeBlock";
 
 // import CSS
 import "./index.css";
@@ -27,6 +28,7 @@ export default {
 	Section,
 	Footer,
 	Hero,
+	CodeBlock,
 };
 
 export const site = { Layout };
