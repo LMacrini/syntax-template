@@ -20,14 +20,7 @@ export default function QuickLink(props) {
                     <span className="absolute -inset-px rounded-xl" />
                 {title}
                 </Link>
-                {/* <a href={href}>
-                    <span className="absolute -inset-px rounded-xl" /> 
-                    {title}
-                </a> */}
             </h2>
-            {/* <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
-                {description}
-            </p> */}
             {paragraphs.map(paragraph => <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">
                 {paragraph}
             </p>)}
