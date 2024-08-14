@@ -11,7 +11,6 @@ export default function Layout(props) {
 	
 		if (header && content) {
 		  const headerHeight = header.offsetHeight;
-		  console.log("headerHeight",headerHeight)
 		  content.style.paddingTop = `${headerHeight}px`;
 		}
 	
