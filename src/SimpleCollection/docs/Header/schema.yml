@@ -34,7 +34,7 @@ properties:
         value: icon
   childrenMode:
     label:
-      en: When to render children
+      en: When to render sub-sections
       fr: Quand afficher sous-parties
     type: string
     default: home
