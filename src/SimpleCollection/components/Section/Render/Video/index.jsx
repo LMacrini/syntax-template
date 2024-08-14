@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaCompress, FaExpand } from "react-icons/fa";
 import { Media, Image } from "@uniwebcms/module-sdk";
-import clsx from "clsx";
+import { youtubeRegex, vimeoRegex } from "./regex";
 
 function getVideos(sections) {
 	const videos = sections
@@ -14,12 +14,7 @@ function getVideos(sections) {
 }
 
 async function getVideoThumbnail(url) {
-	const youtubeRegex =
-		/\b(?:https?:\/\/)?(?:(?:www|m)\.)?youtu(?:\.be\/|be\.com\/(?:watch(?:\?(?:(?:feature=player_embedded|app=desktop)&)?v=|\/)|v\/|oembed\?url=http%3A\/\/www\.youtube\.com\/watch\?v%3D|attribution_link\?a=[0-9A-Za-z\-_]{10,20}&u=(?:%2F|\/)watch%3Fv%3D|e(?:mbed)?\/|shorts\/)|be-nocookie\.com\/embed\/)([0-9A-Za-z\-_]{10,20})/;
-
-	const vimeoRegex =
-		/(?:http|https)?:?\/?\/?(?:www\.)?(?:player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)/;
-
+	
 	const youtubeMatch = url.match(youtubeRegex);
 	if (youtubeMatch) {
 		const videoId = youtubeMatch[1];
