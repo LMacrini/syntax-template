@@ -32,3 +32,22 @@ properties:
           en: Icon
           fr: Icône
         value: icon
+  childrenMode:
+    label:
+      en: When to render children
+      fr: Quand afficher sous-parties
+    type: string
+    default: home
+    enum:
+      - label:
+          en: Never
+          fr: Jamais
+        value: Never
+      - label:
+          en: On home page
+          fr: Sur la page d'accueil
+        value: home
+      - label:
+          en: Always
+          fr: Toujours
+        value: always
