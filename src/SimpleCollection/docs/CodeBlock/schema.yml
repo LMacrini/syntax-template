@@ -7,3 +7,10 @@ description:
 label:
   en: Code Block
   fr: Bloc de code
+
+properties:
+  lang:
+    label:
+      en: language
+      fr: langue
+    type: string
