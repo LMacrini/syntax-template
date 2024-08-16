@@ -7,3 +7,28 @@ description:
 label:
   en: Hero
   fr: Héro
+
+properties:
+  image_one:
+    label:
+      en: Alignment of the first image
+      fr: Alignement de la première image
+    type: string
+    default: left
+    enum:
+      - label:
+          en: Bottom
+          fr: Bas
+        value: Bottom
+      - label:
+          en: Left
+          fr: Gauche
+        value: left
+      - label:
+          en: Right
+          fr: Droite
+        value: right
+      - label:
+          en: Top
+          fr: Haut
+        value: top
