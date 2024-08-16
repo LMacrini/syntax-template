@@ -51,3 +51,8 @@ properties:
           en: Always
           fr: Toujours
         value: always
+  github:
+    label:
+      en: Github repository URL (optional)
+      fr: Lien du répertoire Github (optionnel)
+    type: string
