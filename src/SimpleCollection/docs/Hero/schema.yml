@@ -9,7 +9,7 @@ label:
   fr: Héro
 
 properties:
-  image_one:
+  imageOne:
     label:
       en: Alignment of the first image
       fr: Alignement de la première image
@@ -19,7 +19,15 @@ properties:
       - label:
           en: Bottom
           fr: Bas
-        value: Bottom
+        value: bottom
+      - label:
+          en: Bottom left
+          fr: Bas gauche
+        value: bottomLeft
+      - label:
+          en: Bottom right
+          fr: Bas droit
+        value: bottomRight
       - label:
           en: Left
           fr: Gauche
@@ -32,3 +40,11 @@ properties:
           en: Top
           fr: Haut
         value: top
+      - label:
+          en: Top left
+          fr: Haut gauche
+        value: topLeft
+      - label:
+          en: Top right
+          fr: Haut droit
+        value: topRight
