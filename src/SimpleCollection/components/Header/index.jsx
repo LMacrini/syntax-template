@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Image } from '@uniwebcms/module-sdk'
+import { Icon, Image, Link } from "@uniwebcms/module-sdk";
 import clsx from "clsx";
 import { ThemeSelector } from "./ThemeSelector";
 import LangSwitch from "./LangSwitch";
@@ -14,8 +14,9 @@ function GitHubIcon(props) {
 }
 
 function Logo({ mode, content, ...props }) {
-	return mode === "icon" ? <Icon icon={content[0].attrs.svg} {...props}/> : null
-
+	return mode === "icon" ? (
+		<Icon icon={content[0].attrs.svg} {...props} />
+	) : null;
 }
 
 export default function Header(props) {
@@ -36,12 +37,14 @@ export default function Header(props) {
 	}, []);
 
 	const {
+		block,
 		block: {
 			content: { content },
-			params: { mode },
+			params: { mode, github },
 		},
 	} = props;
 
+	const ChildBlocks = block.getChildBlockRenderer();
 	const dividedContent = [];
 	let currentSubArray = [];
 
@@ -57,33 +60,42 @@ export default function Header(props) {
 	dividedContent.push(currentSubArray);
 
 	return (
-		<header
-			id="header"
-			className={clsx(
-				"fixed top-0 w-full z-50 flex flex-none flex-wrap items-center justify-between bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 sm:px-6 lg:px-8 dark:shadow-none",
-				isScrolled
-					? "dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75"
-					: "dark:bg-transparent"
-			)}
-		>
-			<div className="mr-6 flex lg:hidden">{/* <MobileNavigation /> */}</div>
-			<div className="relative flex flex-grow basis-0 items-center">
-				{/* <Link href="/" aria-label="Home page">
+		<>
+			<header
+				id="header"
+				className={clsx(
+					"fixed top-0 w-full z-50 flex flex-none flex-wrap items-center justify-between bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 sm:px-6 lg:px-8 dark:shadow-none",
+					isScrolled
+						? "dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75"
+						: "dark:bg-transparent"
+				)}
+			>
+				<div className="mr-6 flex lg:hidden">{/* <MobileNavigation /> */}</div>
+				<div className="relative flex flex-grow basis-0 items-center">
+					{/* <Link href="/" aria-label="Home page">
             <Logomark className="h-9 w-9 lg:hidden" />
             <Logo className="hidden h-9 w-auto fill-slate-700 lg:block dark:fill-sky-100" />
           </Link> */}
-				{/* <Icon icon={content[0].attrs.svg} className='hidden h-9 w-auto lg:block dark:fill-sky-100'/> */}
-				<Logo mode={mode} content={content} className='hidden h-9 w-auto lg:block'/>
-        {/* <Image profile={props.page.getPageProfile()} value={`${content[0].attrs.info.contentId}/${content[0].attrs.info.identifier}`}/> */}
-			</div>
-			<div className="-my-5 mr-6 sm:mr-8 md:mr-0"><Search {...props}/></div>
-			<div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
-				<ThemeSelector className="relative z-10" />
-				{/* <Link href="https://github.com" className="group" aria-label="GitHub">
+					{/* <Icon icon={content[0].attrs.svg} className='hidden h-9 w-auto lg:block dark:fill-sky-100'/> */}
+					<Logo
+						mode={mode}
+						content={content}
+						className="hidden h-9 w-auto lg:block"
+					/>
+					{/* <Image profile={props.page.getPageProfile()} value={`${content[0].attrs.info.contentId}/${content[0].attrs.info.identifier}`}/> */}
+				</div>
+				<div className="-my-5 mr-6 sm:mr-8 md:mr-0">
+					<Search {...props} />
+				</div>
+				<div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
+					<ThemeSelector className="relative z-10" />
+					{github && <Link href={github} className="group" aria-label="GitHub">
             <GitHubIcon className="h-6 w-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
-          </Link> */}
-		  <LangSwitch {...props}/>
-			</div>
-		</header>
+          </Link>}
+					{/* <LangSwitch {...props} /> */}
+				</div>
+			</header>
+			<ChildBlocks block={block} />
+		</>
 	);
 }
