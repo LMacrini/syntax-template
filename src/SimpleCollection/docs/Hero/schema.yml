@@ -48,3 +48,42 @@ properties:
           en: Top right
           fr: Haut droit
         value: topRight
+  imageTwo:
+    label:
+      en: Alignment of the second image
+      fr: Alignement de la seconde image
+    type: string
+    default: left
+    enum:
+      - label:
+          en: Bottom
+          fr: Bas
+        value: bottom
+      - label:
+          en: Bottom left
+          fr: Bas gauche
+        value: bottomLeft
+      - label:
+          en: Bottom right
+          fr: Bas droit
+        value: bottomRight
+      - label:
+          en: Left
+          fr: Gauche
+        value: left
+      - label:
+          en: Right
+          fr: Droite
+        value: right
+      - label:
+          en: Top
+          fr: Haut
+        value: top
+      - label:
+          en: Top left
+          fr: Haut gauche
+        value: topLeft
+      - label:
+          en: Top right
+          fr: Haut droit
+        value: topRight
