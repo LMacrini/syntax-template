@@ -9,6 +9,28 @@ label:
   fr: Héro
 
 properties:
+  presetAlign:
+    label:
+      en: Preset alignment
+      fr: Alignement du préréglage
+    type: string
+    default: right
+    enum:
+      - label:
+          en: Right
+          fr: Droite
+        value: right
+  presetCol:
+    label:
+      en: Preset color
+      fr: Couleur du préréglage
+    type: string
+    default: blue
+    enum:
+      - label:
+          en: Blue
+          fr: Bleu
+        value: blue
   imageOne:
     label:
       en: Alignment of the first image
