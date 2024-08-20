@@ -41,7 +41,7 @@ properties:
       - label:
           en: No
           fr: Non
-        value: false
+        value: "false"
       - label:
           en: Yes
           fr: Oui
