@@ -36,16 +36,16 @@ properties:
       en: Buttons
       fr: Boutons
     type: string 
-    default: false
+    default: "false"
     enum:
       - label:
-          en: False
-          fr: Faux
+          en: No
+          fr: Non
         value: false
       - label:
-          en: True
-          fr: Vrai
-        value: true
+          en: Yes
+          fr: Oui
+        value: "true"
   buttonHref1:
     label:
       en: Primary button URL
