@@ -31,6 +31,17 @@ properties:
           en: Blue
           fr: Bleu
         value: blue
+  buttonBool:
+    label:
+      en: Buttons
+      fr: Boutons
+    type: boolean
+    default: true
+  buttonHref1:
+    label:
+      en: Primary button URL
+      fr: Lien du bouton primaire
+    type: string
   imageOne:
     label:
       en: Alignment of the first image
