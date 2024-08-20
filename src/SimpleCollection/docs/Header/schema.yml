@@ -42,7 +42,7 @@ properties:
       - label:
           en: Never
           fr: Jamais
-        value: Never
+        value: never
       - label:
           en: On home page
           fr: Sur la page d'accueil
