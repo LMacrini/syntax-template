@@ -19,6 +19,10 @@ function Logo({ mode, content, ...props }) {
 	) : null;
 }
 
+Header.blockState = {
+	type: "hi",
+}; // to get this stuff you gotta do block.getBlockInfo()
+
 export default function Header(props) {
 	if (props === undefined) {
 		return null;
@@ -40,9 +44,35 @@ export default function Header(props) {
 		block,
 		block: {
 			content: { content },
-			params: { mode, github },
+			childBlocks,
+			params: { mode, github, childrenMode },
+			id,
 		},
+		page,
 	} = props;
+
+	useEffect(() => {
+		const header = document.getElementById(`header${id}`);
+		const padding = document.getElementById(`headerPadding${id}`);
+	
+		if (header && padding) {
+		  const headerHeight = header.offsetHeight;
+		  padding.style.paddingTop = `${headerHeight}px`;
+		}
+	
+		const handleResize = () => {
+		  if (header && padding) {
+			const headerHeight = header.offsetHeight;
+			padding.style.paddingTop = `${headerHeight}px`;
+		  }
+		};
+	
+		window.addEventListener('resize', handleResize);
+	
+		return () => {
+		  window.removeEventListener('resize', handleResize);
+		};
+	  }, []);
 
 	const ChildBlocks = block.getChildBlockRenderer();
 	const dividedContent = [];
@@ -62,7 +92,7 @@ export default function Header(props) {
 	return (
 		<>
 			<header
-				id="header"
+				id={`header${id}`}
 				className={clsx(
 					"fixed top-0 w-full z-50 flex flex-none flex-wrap items-center justify-between bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 sm:px-6 lg:px-8 dark:shadow-none",
 					isScrolled
@@ -89,13 +119,17 @@ export default function Header(props) {
 				</div>
 				<div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
 					<ThemeSelector className="relative z-10" />
-					{github && <Link href={github} className="group" aria-label="GitHub">
-            <GitHubIcon className="h-6 w-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
-          </Link>}
+					{github && (
+						<Link href={github} className="group" aria-label="GitHub">
+							<GitHubIcon className="h-6 w-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
+						</Link>
+					)}
 					{/* <LangSwitch {...props} /> */}
 				</div>
-			</header>
-			<ChildBlocks block={block} />
+			</header><div id={`headerPadding${id}`}/>
+			{((
+				// (page.activeRoute === "" && childrenMode === "home") ||
+				childrenMode === "always")) && <ChildBlocks block={block} />}
 		</>
 	);
 }
