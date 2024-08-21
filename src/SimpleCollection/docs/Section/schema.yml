@@ -94,3 +94,21 @@ properties:
     description:
       en: The number of columns in the section.
       fr: Le nombre de colonnes dans la section.
+  lead:
+    label:
+      en: Lead text
+      fr: Texte principal
+    type: string
+    default: "false"
+    enum:
+      - label:
+          en: No
+          fr: Non
+        value: "false"
+      - label:
+          en: Yes
+          fr: Oui
+        value: "true"
+    description:
+      en: Whether or not the text be lead text. It will be bigger if it is.
+      fr: Si le texte est principal. Cela le fera plus large.
