@@ -40,7 +40,7 @@ const ResultItem = (props) => {
                 <span
                     className={`text-base leading-[1.2] truncate text-[#006621]`}
                 >
-                    {href}
+                    {(() => {console.log(href); returnhref})()}
                 </span>
                 <span
                     className={`text-sm mt-1.5 leading-[18px] line-clamp-3 text-[#444]`}

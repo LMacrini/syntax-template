@@ -1,322 +1,429 @@
-import React, { Fragment, useState, useEffect, useRef, useCallback } from 'react';
-import { Transition, Dialog } from '@headlessui/react';
-import ResultItem from './ResultItem';
-import { MdClose } from 'react-icons/md';
-import { HiSearch } from 'react-icons/hi';
-import FlexSearch from 'flexsearch';
+import React, {
+	Fragment,
+	useState,
+	useEffect,
+	useRef,
+	useCallback,
+} from "react";
+import { Transition, Dialog, DialogPanel } from "@headlessui/react";
+import ResultItem from "./ResultItem";
+import { MdClose } from "react-icons/md";
+import { HiSearch } from "react-icons/hi";
+import FlexSearch from "flexsearch";
+
+function SearchIcon(props) {
+	return (
+		<svg aria-hidden="true" viewBox="0 0 20 20" {...props}>
+			<path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z" />
+		</svg>
+	);
+}
 
 const SearchBox = (props) => {
-    const { setResult, input, setInput, searchFn, website } = props;
+	const { setResult, input, setInput, searchFn, website } = props;
 
-    const box = useRef(null);
+	const box = useRef(null);
 
-    useEffect(() => {
-        if (box) {
-            box.current.focus();
-        }
-    }, [box]);
+	useEffect(() => {
+		if (box) {
+			box.current.focus();
+		}
+	}, [box]);
 
-    const handleSearch = (searchText) => {
-        const result = searchFn(searchText);
-        if (result instanceof Promise) {
-            result.then((data) => {
-                setResult(data);
-            });
-        } else {
-            setResult(result);
-        }
-    };
+	const handleSearch = (searchText) => {
+		const result = searchFn(searchText);
+		if (result instanceof Promise) {
+			result.then((data) => {
+				setResult(data);
+			});
+		} else {
+			setResult(result);
+		}
+	};
 
-    const placeholder = website.localize({
-        en: 'Search...',
-        fr: 'Recherche...'
-    });
+	const placeholder = website.localize({
+		en: "Search...",
+		fr: "Recherche...",
+	});
 
-    return (
-        <div className={`relative mx-auto text-gray-600 w-full flex items-center max-w-3xl md:px-4`}>
-            <div className={`bg-white rounded-lg !shadow-md overflow-hidden flex-auto flex items-center`}>
-                <input
-                    className={`w-full flex-auto appearance-none bg-transparent pl-4 pr-8 py-4 text-gray-600 text-base sm:text-sm placeholder-gray-500 focus:outline-none`}
-                    placeholder={placeholder}
-                    value={input}
-                    ref={box}
-                    onChange={(e) => {
-                        setInput(e.target.value);
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleSearch(e.target.value);
-                        }
-                    }}
-                />
-                <div
-                    className={`p-4 cursor-pointer group`}
-                    onClick={() => {
-                        handleSearch();
-                    }}>
-                    <HiSearch className={`cursor-pointer w-5 h-5 text-gray-600 group-hover:text-gray-900`} />
-                </div>
-            </div>
-        </div>
-    );
+	return (
+		<div
+			className={`relative mx-auto text-gray-600 w-full flex items-center max-w-3xl md:px-4`}
+		>
+			<div
+				className={`bg-white rounded-lg !shadow-md overflow-hidden flex-auto flex items-center`}
+			>
+				<input
+					className={`w-full flex-auto appearance-none bg-transparent pl-4 pr-8 py-4 text-gray-600 text-base sm:text-sm placeholder-gray-500 focus:outline-none`}
+					placeholder={placeholder}
+					value={input}
+					ref={box}
+					onChange={(e) => {
+						setInput(e.target.value);
+					}}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							handleSearch(e.target.value);
+						}
+					}}
+				/>
+				<div
+					className={`p-4 cursor-pointer group`}
+					onClick={() => {
+						handleSearch();
+					}}
+				>
+					<HiSearch
+						className={`cursor-pointer w-5 h-5 text-gray-600 group-hover:text-gray-900`}
+					/>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 const SearchResult = React.memo((props) => {
-    const { result, website } = props;
+	const { result, website } = props;
 
-    const fallback = (
-        <div className={`flex flex-col mt-2 pt-4 md:mt-3 md:pt-3 md:px-4 max-w-3xl mx-auto`}>
-            <span className={`text-white mb-4`}>
-                {website.localize({
-                    en: 'No search result.',
-                    fr: 'Aucun résultat de recherche.'
-                })}
-            </span>
-        </div>
-    );
+	const fallback = (
+		<div
+			className={`flex flex-col mt-2 pt-4 md:mt-3 md:pt-3 md:px-4 max-w-3xl mx-auto`}
+		>
+			<span className={`text-white mb-4`}>
+				{website.localize({
+					en: "No search result.",
+					fr: "Aucun résultat de recherche.",
+				})}
+			</span>
+		</div>
+	);
 
-    let total = 0,
-        hits = [];
+	let total = 0,
+		hits = [];
 
-    if (result) {
-        if (!result.length) return fallback;
+	if (result) {
+		if (!result.length) return fallback;
 
-        hits = result?.[0]?.result;
+		hits = result?.[0]?.result;
 
-        total = hits.length;
+		total = hits.length;
 
-        if (!total) return fallback;
-    } else {
-        return null;
-    }
+		if (!total) return fallback;
+	} else {
+		return null;
+	}
 
-    return (
-        <div className={`flex flex-col mx-auto max-w-3xl w-full mt-5 md:px-4`}>
-            <span className={`text-white mb-4 text-sm`}>
-                {website.localize({
-                    en: `${total} search results.`,
-                    fr: `${total} Résultats de recherche.`
-                })}
-            </span>
-            <div className={`bg-white relative rounded-lg [overflow:overlay] max-h-[calc(100vh-240px)]`}>
-                {hits.length
-                    ? hits.map((item, i) => {
-                          return <ResultItem key={i} website={website} {...item?.doc} />;
-                      })
-                    : null}
-            </div>
-        </div>
-    );
+	return (
+		<div className={`flex flex-col mx-auto max-w-3xl w-full mt-5 md:px-4`}>
+			<span className={`text-white mb-4 text-sm`}>
+				{website.localize({
+					en: `${total} search results.`,
+					fr: `${total} Résultats de recherche.`,
+				})}
+			</span>
+			<div
+				className={`bg-white relative rounded-lg [overflow:overlay] max-h-[calc(100vh-240px)]`}
+			>
+				{hits.length
+					? hits.map((item, i) => {
+							return <ResultItem key={i} website={website} {...item?.doc} />;
+					  })
+					: null}
+			</div>
+		</div>
+	);
 });
 
 const SearchKit = (props) => {
-    const [result, setResult] = useState(null);
-    const [input, setInput] = useState('');
+	const [result, setResult] = useState(null);
+	const [input, setInput] = useState("");
 
-    return (
-        <main className={`w-screen max-w-full h-screen p-5`}>
-            <div className={`pt-11 mx-auto max-w-6xl`}>
-                <SearchBox {...props} result={result} setResult={setResult} input={input} setInput={setInput} />
-                <SearchResult {...{ result, ...props }} />
-            </div>
-        </main>
-    );
+	return (
+		<main className={`w-screen max-w-full h-screen p-5`}>
+			<div className={`pt-11 mx-auto max-w-6xl`}>
+				<SearchBox
+					{...props}
+					result={result}
+					setResult={setResult}
+					input={input}
+					setInput={setInput}
+				/>
+				<SearchResult {...{ result, ...props }} />
+			</div>
+		</main>
+	);
 };
 
+function useSearchProps() {
+	let buttonRef = useRef(null);
+	let [open, setOpen] = useState(false);
+
+	return {
+		buttonProps: {
+			ref: buttonRef,
+			onClick() {
+				setOpen(true);
+			},
+		},
+		dialogProps: {
+			open,
+			setOpen: useCallback((open) => {
+				let { width = 0, height = 0 } =
+					buttonRef.current?.getBoundingClientRect() ?? {};
+				if (!open || (width !== 0 && height !== 0)) {
+					setOpen(open);
+				}
+			}, []),
+		},
+	};
+}
+
 const Search = (props) => {
-    const { website, iconPosition = 'center' } = props;
+	const { website, iconPosition = "center" } = props;
 
-    // const searchData = website.getSearchData();
+	let [modifierKey, setModifierKey] = useState();
+    let {buttonProps, dialogProps} = useSearchProps();
 
-    let [isOpen, setIsOpen] = useState(false);
+	// const searchData = website.getSearchData();
 
-    function closeModal() {
-        setIsOpen(false);
-    }
+	let [isOpen, setIsOpen] = useState(false);
 
-    function openModal() {
-        setIsOpen(true);
-    }
+	useEffect(() => {
+		setModifierKey(
+			/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl "
+		);
+	}, []);
 
-    const { useLocation } = website.getRoutingComponents();
-    const location = useLocation();
+	function closeModal() {
+		setIsOpen(false);
+	}
 
-    const path = location.pathname;
+	function openModal() {
+		setIsOpen(true);
+	}
 
-    const [searcher, setSearcher] = useState(null);
+	const { useLocation } = website.getRoutingComponents();
+	const location = useLocation();
 
-    // const query = useCallback(
-    //     (text) => {
-    //         if (!searcher) return null;
+	const path = location.pathname;
 
-    //         if (website) {
-    //             website.submitEvent('search', {
-    //                 search_term: text,
-    //             });
-    //         }
+	const [searcher, setSearcher] = useState(null);
 
-    //         return searcher.search(text, {
-    //             enrich: true,
-    //         });
-    //     },
-    //     [searcher]
-    // );
+	// const query = useCallback(
+	//     (text) => {
+	//         if (!searcher) return null;
 
-    const query = useCallback(
-        (text) => {
-            if (!searcher) {
-                return website.getSearchData().then((data) => {
-                    const index = new FlexSearch.Document({
-                        document: {
-                            id: 'href',
-                            index: ['content'],
-                            store: [
-                                'href',
-                                'title',
-                                'description',
-                                'route',
-                                'contentType',
-                                'viewType',
-                                'contentId',
-                                'banner',
-                                'avatar'
-                            ]
-                        },
-                        cache: true,
-                        tokenize: 'forward'
-                    });
+	//         if (website) {
+	//             website.submitEvent('search', {
+	//                 search_term: text,
+	//             });
+	//         }
 
-                    const add = (sequential_data) => {
-                        for (let x = 0, data; x < sequential_data.length; x++) {
-                            data = sequential_data[x];
+	//         return searcher.search(text, {
+	//             enrich: true,
+	//         });
+	//     },
+	//     [searcher]
+	// );
 
-                            index.add({
-                                ...data,
-                                content: `${data.title} ${data.description} ${data.content}`
-                            });
-                        }
-                    };
+	const query = useCallback(
+		(text) => {
+			if (!searcher) {
+				return website.getSearchData().then((data) => {
+					const index = new FlexSearch.Document({
+						document: {
+							id: "href",
+							index: ["content"],
+							store: [
+								"href",
+								"title",
+								"description",
+								"route",
+								"contentType",
+								"viewType",
+								"contentId",
+								"banner",
+								"avatar",
+							],
+						},
+						cache: true,
+						tokenize: "forward",
+					});
 
-                    add(data);
+					const add = (sequential_data) => {
+						for (let x = 0, data; x < sequential_data.length; x++) {
+							data = sequential_data[x];
 
-                    setSearcher(index);
+							index.add({
+								...data,
+								content: `${data.title} ${data.description} ${data.content}`,
+							});
+						}
+					};
 
-                    if (website) {
-                        website.submitEvent('search', {
-                            search_term: text
-                        });
-                    }
+					add(data);
 
-                    return index.search(text, {
-                        enrich: true
-                    });
-                });
-            } else {
-                if (website) {
-                    website.submitEvent('search', {
-                        search_term: text
-                    });
-                }
+					setSearcher(index);
 
-                return searcher.search(text, {
-                    enrich: true
-                });
-            }
-        },
-        [searcher]
-    );
+					if (website) {
+						website.submitEvent("search", {
+							search_term: text,
+						});
+					}
 
-    // useEffect(() => {
-    //     if (searchData) {
-    //         const index = new FlexSearch.Document({
-    //             document: {
-    //                 id: 'href',
-    //                 index: ['content'],
-    //                 store: [
-    //                     'href',
-    //                     'title',
-    //                     'description',
-    //                     'route',
-    //                     'contentType',
-    //                     'viewType',
-    //                     'contentId',
-    //                     'banner',
-    //                     'avatar',
-    //                 ],
-    //             },
-    //             cache: true,
-    //             tokenize: 'forward',
-    //         });
+					return index.search(text, {
+						enrich: true,
+					});
+				});
+			} else {
+				if (website) {
+					website.submitEvent("search", {
+						search_term: text,
+					});
+				}
 
-    //         const add = (sequential_data) => {
-    //             for (let x = 0, data; x < sequential_data.length; x++) {
-    //                 data = sequential_data[x];
+				return searcher.search(text, {
+					enrich: true,
+				});
+			}
+		},
+		[searcher]
+	);
 
-    //                 index.add({
-    //                     ...data,
-    //                     content: `${data.title} ${data.description} ${data.content}`,
-    //                 });
-    //             }
-    //         };
+	// useEffect(() => {
+	//     if (searchData) {
+	//         const index = new FlexSearch.Document({
+	//             document: {
+	//                 id: 'href',
+	//                 index: ['content'],
+	//                 store: [
+	//                     'href',
+	//                     'title',
+	//                     'description',
+	//                     'route',
+	//                     'contentType',
+	//                     'viewType',
+	//                     'contentId',
+	//                     'banner',
+	//                     'avatar',
+	//                 ],
+	//             },
+	//             cache: true,
+	//             tokenize: 'forward',
+	//         });
 
-    //         add(searchData);
+	//         const add = (sequential_data) => {
+	//             for (let x = 0, data; x < sequential_data.length; x++) {
+	//                 data = sequential_data[x];
 
-    //         setSearcher(index);
-    //     }
-    // }, [searchData]);
+	//                 index.add({
+	//                     ...data,
+	//                     content: `${data.title} ${data.description} ${data.content}`,
+	//                 });
+	//             }
+	//         };
 
-    useEffect(() => {
-        if (isOpen) {
-            closeModal();
-        }
-    }, [path]);
+	//         add(searchData);
 
-    return (
-        <>
-            <div className={`rounded-lg flex items-center justify-${iconPosition}`} onClick={openModal}>
+	//         setSearcher(index);
+	//     }
+	// }, [searchData]);
+
+	useEffect(() => {
+		if (isOpen) {
+			return;
+		}
+
+		function onKeyDown(event) {
+			if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+				event.preventDefault();
+				openModal();
+			}
+		}
+
+		window.addEventListener("keydown", onKeyDown);
+
+		return () => {
+			window.removeEventListener("keydown", onKeyDown);
+		};
+	}, [isOpen, setIsOpen]);
+
+	useEffect(() => {
+		if (isOpen) {
+			closeModal();
+		}
+	}, [path]);
+
+	return (
+		<>
+			{/* <div className={`rounded-lg flex items-center justify-${iconPosition}`} onClick={openModal}>
                 <HiSearch
                     className={`cursor-pointer w-6 h-6 text-gray-600 hover:text-gray-800 ${props.iconClassName}`}
                     style={props.iconStyle}
                 />
-            </div>
-            <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as='div' className={`relative inset-0 z-50`} onClose={closeModal}>
-                    <Transition.Child
-                        as={Fragment}
-                        enter={`ease-out duration-300`}
-                        enterFrom={`opacity-0`}
-                        enterTo={`opacity-100`}
-                        leave={`ease-in duration-200`}
-                        leaveFrom={`opacity-100`}
-                        leaveTo={`opacity-0`}>
-                        <div
-                            onClick={closeModal}
-                            className={`fixed inset-0 bg-gray-900 bg-opacity-60 transition-opacity`}
-                            aria-hidden='true'></div>
-                    </Transition.Child>
-                    <div className='fixed inset-0 overflow-y-auto'>
-                        <div className={`min-h-screen px-4 flex justify-center`}>
-                            <MdClose
-                                className={`w-10 h-10 text-gray-200 hover:text-white cursor-pointer absolute top-4 right-6 z-[51]`}
-                                onClick={closeModal}></MdClose>
-                            <Transition.Child
-                                as='div'
-                                enter={`ease-out duration-300`}
-                                enterFrom={`opacity-0 scale-95`}
-                                enterTo={`opacity-100 scale-100`}
-                                leave={`ease-in duration-200`}
-                                leaveFrom={`opacity-100 scale-100`}
-                                leaveTo={`opacity-0 scale-95`}>
-                                <Dialog.Panel>
-                                    <SearchKit website={website} searchFn={query}></SearchKit>
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
-                    </div>
-                </Dialog>
-            </Transition>
-        </>
-    );
+            </div> */}
+			<button
+				type="button"
+				className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 lg:w-96 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500"
+				{...buttonProps} onClick={openModal}
+			>
+				<SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 md:group-hover:fill-slate-400 dark:fill-slate-500" />
+				<span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
+					Search docs
+				</span>
+				{modifierKey && (
+					<kbd className="ml-auto hidden font-medium text-slate-400 md:block dark:text-slate-500">
+						<kbd className="font-sans">{modifierKey}</kbd>
+						<kbd className="font-sans">K</kbd>
+					</kbd>
+				)}
+			</button>
+			<Transition appear show={isOpen} as={Fragment}>
+				<Dialog
+					as="div"
+					className={`relative inset-0 z-50`}
+					onClose={closeModal}
+				>
+					<Transition.Child
+						as={Fragment}
+						enter={`ease-out duration-300`}
+						enterFrom={`opacity-0`}
+						enterTo={`opacity-100`}
+						leave={`ease-in duration-200`}
+						leaveFrom={`opacity-100`}
+						leaveTo={`opacity-0`}
+					>
+						<div
+							onClick={closeModal}
+							className={`fixed inset-0 bg-gray-900 bg-opacity-60 transition-opacity`}
+							aria-hidden="true"
+						></div>
+					</Transition.Child>
+					<div className="fixed inset-0 overflow-y-auto">
+						<div className={`min-h-screen px-4 flex justify-center`}>
+							<MdClose
+								className={`w-10 h-10 text-gray-200 hover:text-white cursor-pointer absolute top-4 right-6 z-[51]`}
+								onClick={closeModal}
+							></MdClose>
+							<Transition.Child
+								as="div"
+								enter={`ease-out duration-300`}
+								enterFrom={`opacity-0 scale-95`}
+								enterTo={`opacity-100 scale-100`}
+								leave={`ease-in duration-200`}
+								leaveFrom={`opacity-100 scale-100`}
+								leaveTo={`opacity-0 scale-95`}
+							>
+								<Dialog.Panel>
+									<SearchKit website={website} searchFn={query}></SearchKit>
+								</Dialog.Panel>
+							</Transition.Child>
+						</div>
+					</div>
+				</Dialog>
+			</Transition>
+		</>
+	);
 };
 
 export default Search;
