@@ -1,20 +1,18 @@
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 const dotenv = require('dotenv');
+const sizeOf = require('image-size');
 
 // Load environment variables from .env files
 dotenv.config({ path: '../.env.dev' });
 dotenv.config({ path: '../.env' });
 
-const TARGET_MODULE = process.env.TARGET_MODULE;
-const PUBLIC_URL = process.env.PUBLIC_URL;
-
-if (!PUBLIC_URL) {
-    console.error('PUBLIC_URL must be set in the environment variables.');
-    process.exit(1);
+// Function to determine the correct output directory based on environment
+function getOutputDirectory() {
+    const isProduction = process.env.NODE_ENV === 'production';
+    return isProduction ? path.join(__dirname, '../dist') : path.join(__dirname, '../build_dev');
 }
-
-const distDir = path.join(__dirname, '../dist');
 
 // Function to read the latest version UUID from the latest_version.txt file
 function getLatestVersion(moduleDir) {
@@ -28,15 +26,54 @@ function getLatestVersion(moduleDir) {
     }
 }
 
-// Function to create file mappings for a given build directory
-function createFileMappings(buildDir, moduleName, latestVersion) {
+// Function to process a module for either manifest or doc generation
+function processModule(moduleName, taskFunction) {
+    const outputDir = getOutputDirectory();
+    const moduleDir = path.join(outputDir, moduleName);
+    const latestVersion = getLatestVersion(moduleDir);
+
+    if (!latestVersion) {
+        console.error(`Skipping module ${moduleName} due to missing latest version.`);
+        return;
+    }
+
+    taskFunction(moduleName, moduleDir, latestVersion);
+}
+
+// Function to handle multiple modules
+function handleModules(taskFunction) {
+    const TARGET_MODULE = process.env.TARGET_MODULE || '*';
+    const outputDir = getOutputDirectory();
+
+    if (TARGET_MODULE === '*') {
+        try {
+            const modules = fs.readdirSync(outputDir).filter((file) => {
+                const modulePath = path.join(outputDir, file);
+                return fs.statSync(modulePath).isDirectory();
+            });
+
+            modules.forEach((moduleName) => {
+                console.log(`Processing module: ${moduleName}`);
+                processModule(moduleName, taskFunction);
+            });
+        } catch (err) {
+            console.error('Error reading module directories:', err);
+            process.exit(1);
+        }
+    } else {
+        processModule(TARGET_MODULE, taskFunction);
+    }
+}
+
+// Function to create file mappings for a given build directory (used in manifest generation)
+function createFileMappings(buildDir, moduleName, latestVersion, publicUrl) {
     const fileMappings = {};
     try {
         const files = fs.readdirSync(buildDir);
         files.forEach((file) => {
             const filePath = path.join(buildDir, file);
             if (fs.statSync(filePath).isFile()) {
-                fileMappings[file] = `${PUBLIC_URL.toLowerCase()}/${moduleName}/${latestVersion}/${file}`;
+                fileMappings[file] = `${publicUrl.toLowerCase()}/${moduleName}/${latestVersion}/${file}`;
             }
         });
     } catch (err) {
@@ -56,37 +93,132 @@ function writeManifest(buildDir, fileMappings) {
     }
 }
 
-// Main function to process a module
-function processModule(moduleName) {
-    const moduleDir = path.join(distDir, moduleName);
-    const latestVersion = getLatestVersion(moduleDir);
-
-    if (!latestVersion) {
-        console.error(`Skipping module ${moduleName} due to missing latest version.`);
-        return;
+// The generateManifest function to be exported
+function generateManifest(moduleName, moduleDir, latestVersion) {
+    const publicUrl = process.env.PUBLIC_URL;
+    if (!publicUrl) {
+        console.error('PUBLIC_URL must be set in the environment variables.');
+        process.exit(1);
     }
 
     const buildDir = path.join(moduleDir, latestVersion);
-    const fileMappings = createFileMappings(buildDir, moduleName, latestVersion);
+    const fileMappings = createFileMappings(buildDir, moduleName, latestVersion, publicUrl);
     writeManifest(buildDir, fileMappings);
 }
 
-// Check the value of TARGET_MODULE
-if (TARGET_MODULE === '*') {
-    try {
-        const modules = fs.readdirSync(distDir).filter((file) => {
-            const modulePath = path.join(distDir, file);
-            return fs.statSync(modulePath).isDirectory();
-        });
+// Recursively scans a directory for files with specific extensions.
+function scanDirectory(dir, extensions) {
+    let results = [];
 
-        modules.forEach((moduleName) => {
-            console.log(`Processing module: ${moduleName}`);
-            processModule(moduleName);
-        });
-    } catch (err) {
-        console.error('Error reading module directories:', err);
-        process.exit(1);
+    const files = fs.readdirSync(dir);
+
+    for (const file of files) {
+        const fullPath = path.join(dir, file);
+        const stat = fs.statSync(fullPath);
+
+        if (stat.isDirectory()) {
+            results = results.concat(scanDirectory(fullPath, extensions));
+        } else if (extensions.includes(path.extname(file))) {
+            results.push(fullPath);
+        }
     }
-} else {
-    processModule(TARGET_MODULE);
+
+    return results;
 }
+
+// Clear directory contents
+function clearDirectory(dir) {
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    } else {
+        fs.readdirSync(dir).forEach((file) => {
+            const filePath = path.join(dir, file);
+
+            if (fs.lstatSync(filePath).isDirectory()) {
+                clearDirectory(filePath);
+                fs.rmdirSync(filePath);
+            } else {
+                fs.unlinkSync(filePath);
+            }
+        });
+    }
+}
+
+// split the given path string into an arrays of path segments
+function getPathSegments(fullPath) {
+    return path
+        .normalize(fullPath)
+        .replace(/^\/|\/$/g, '')
+        .split(path.sep);
+}
+
+// Load a YAML file and return the parsed content
+function loadYamlContent(fullPath) {
+    // Read YAML file and convert YAML content to JS object
+    return yaml.load(fs.readFileSync(fullPath, 'utf8'));
+}
+
+// Load schema from the given directory
+function loadSchema(entryDir) {
+    const files = scanDirectory(entryDir, ['.yml']);
+
+    const schema = {};
+
+    for (const fullPath of files) {
+        const yamlContent = loadYamlContent(fullPath);
+        const assets = yamlContent.assets ?? {};
+
+        const images = [];
+
+        for (const key in assets) {
+            const image = path.join(path.dirname(fullPath), key);
+
+            if (fs.existsSync(image)) {
+                const dimensions = sizeOf(image);
+                images.push({ key, ...dimensions, path: path.relative(entryDir, image) });
+            }
+        }
+
+        const [component] = getPathSegments(path.relative(entryDir, fullPath));
+
+        schema[component] = { ...yamlContent, images, name: component };
+    }
+
+    return schema;
+}
+
+// Function to generate doc.json from schema.yml (used in doc generation)
+function generateDoc(moduleName) {
+    const srcDir = path.join(__dirname, `../src/${moduleName}/docs`);
+    const outputDir = path.join(getOutputDirectory(), moduleName, '_site');
+    const schema = loadSchema(srcDir);
+
+    clearDirectory(outputDir);
+
+    // Todo: autoComplete Schema ??
+
+    // Copy images to the public directory
+    Object.keys(schema).forEach((component) => {
+        const images = schema[component].images;
+
+        for (const image of images) {
+            const imgSrcPath = path.resolve(srcDir, image.path);
+            const imgTgtPath = path.join(outputDir, 'assets', image.path);
+            image.path = path.relative(outputDir, imgTgtPath);
+
+            // Ensure that the path exists (including sub directories)
+            fs.mkdirSync(path.dirname(imgTgtPath), { recursive: true });
+
+            fs.copyFileSync(imgSrcPath, imgTgtPath);
+        }
+    });
+
+    // Write schema to the public directory
+    fs.writeFileSync(path.join(outputDir, 'schema.json'), JSON.stringify(schema), 'utf-8');
+}
+
+// Export the functions for use in the script
+module.exports = {
+    generateManifest: () => handleModules(generateManifest),
+    generateDoc: () => handleModules(generateDoc)
+};

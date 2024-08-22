@@ -182,7 +182,7 @@ const Search = (props) => {
 	const { website, iconPosition = "center" } = props;
 
 	let [modifierKey, setModifierKey] = useState();
-    let {buttonProps, dialogProps} = useSearchProps();
+	let { buttonProps, dialogProps } = useSearchProps();
 
 	// const searchData = website.getSearchData();
 
@@ -239,6 +239,7 @@ const Search = (props) => {
 								"title",
 								"description",
 								"route",
+								"content",
 								"contentType",
 								"viewType",
 								"contentId",
@@ -271,9 +272,12 @@ const Search = (props) => {
 						});
 					}
 
-					return index.search(text, {
-						enrich: true,
-					});
+					return processResults(
+						text,
+						index.search(text, {
+							enrich: true,
+						})
+					);
 				});
 			} else {
 				if (website) {
@@ -282,13 +286,41 @@ const Search = (props) => {
 					});
 				}
 
-				return searcher.search(text, {
-					enrich: true,
-				});
+				return processResults(
+					text,
+					searcher.search(text, {
+						enrich: true,
+					})
+				);
 			}
 		},
 		[searcher]
 	);
+
+	const processResults = (text, documents) => {
+		return [
+			{
+				...documents[0],
+				result: documents[0].result.map(({ doc, ...rest }) => {
+					const sentences = doc.content.split(/[.!?\|]/);
+					const matchingSentence = sentences
+						.find((sentence) =>
+							sentence.toLowerCase().includes(text.toLowerCase())
+						)
+						?.trim();
+
+					return {
+						...rest,
+						doc: {
+							...doc,
+							content: matchingSentence || "",
+							query: text,
+						},
+					};
+				}),
+			},
+		];
+	};
 
 	// useEffect(() => {
 	//     if (searchData) {
@@ -365,7 +397,8 @@ const Search = (props) => {
 			<button
 				type="button"
 				className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 lg:w-96 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500"
-				{...buttonProps} onClick={openModal}
+				{...buttonProps}
+				onClick={openModal}
 			>
 				<SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 md:group-hover:fill-slate-400 dark:fill-slate-500" />
 				<span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">

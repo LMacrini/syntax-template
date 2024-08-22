@@ -14,7 +14,8 @@
         "build:prod-copy-commit": "webpack --mode=production && run-func helper.js doDeploy commit",
         "serve": "node server.js",
         "watch": "webpack --mode=development --watch --env tunnel",
-        "build:manifest": "PUBLIC_URL=$PUBLIC_URL node postBuild.js"
+        "build:manifest": "PUBLIC_URL=$PUBLIC_URL node postBuild.js",
+        "build:doc": "run-func postBuild.js generateDoc"
     },
     "author": "",
     "license": "ISC",
@@ -26,6 +27,8 @@
         "babel-loader": "^8.2.2",
         "css-loader": "^5.2.0",
         "dotenv": "^10.0.0",
+        "image-size": "^1.1.1",
+        "js-yaml": "^4.1.0",
         "postcss": "^8.4.20",
         "postcss-loader": "^7.0.2",
         "run-func": "^3.0.0",
