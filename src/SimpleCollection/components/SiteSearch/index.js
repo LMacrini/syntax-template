@@ -124,11 +124,13 @@ const SearchResult = React.memo((props) => {
 			<div
 				className={`bg-white relative rounded-lg [overflow:overlay] max-h-[calc(100vh-240px)]`}
 			>
+                <ul>
 				{hits.length
 					? hits.map((item, i) => {
-							return <ResultItem key={i} website={website} {...item?.doc} />;
-					  })
+                        return <ResultItem key={i} website={website} {...item?.doc} />;
+                    })
 					: null}
+                    </ul>
 			</div>
 		</div>
 	);
