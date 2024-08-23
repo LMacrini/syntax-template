@@ -12,10 +12,30 @@ import Button from "../Button";
 export default function Hero(props) {
 	const {
 		block,
-		block: { mainHeader, params: {buttonHref1, buttonHref2, buttonText1, buttonText2} },
+		block: {
+			mainHeader,
+			content: { content },
+		},
 	} = props;
 	const ChildBlock = block.getChildBlockRenderer();
-	const image = block.content.content[0];
+	const image = content[0];
+	const buttons = content
+		.filter(
+			(item) =>
+				item.type === "paragraph" &&
+				item.content.some(({ marks }) =>
+					marks?.some((mark) => mark.type === "link")
+				)
+		)
+		.map((item) => item.content);
+
+	const getButtonLink = (button) => {
+		const marks = button.find(({ marks }) =>
+			marks.some((mark) => mark.type === "link")
+		).marks;
+
+		return marks.find((mark) => mark.type === "link").attrs.href;
+	};
 
 	useEffect(() => {
 		idToId(`Section${block.childBlocks[0].id}`, `childBlocks${block.id}`);
@@ -43,12 +63,15 @@ export default function Hero(props) {
 								{mainHeader.description}
 							</p>
 							<div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-								{(buttonText1 || buttonHref1) && <Button href={buttonHref1} type="manual">
-                                    {buttonText1}
-								</Button>}
-								{(buttonText2 || buttonHref2) && <Button href={buttonHref2} variant="secondary" type="manual">
-                                    {buttonText2}
-								</Button>}
+								{buttons.map((button, index) => (
+									<Button
+										type="manual"
+										variant={index ? "secondary" : "primary"}
+										href={getButtonLink(button)}
+									>
+										{button.map((item) => item.text).join("")}
+									</Button>
+								))}
 							</div>
 						</div>
 					</div>

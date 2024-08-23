@@ -46,26 +46,6 @@ properties:
           en: Yes
           fr: Oui
         value: "true"
-  buttonText1:
-    label:
-      en: Primary button text
-      fr: Texte du bouton primaire
-    type: string
-  buttonHref1:
-    label:
-      en: Primary button URL
-      fr: Lien du bouton primaire
-    type: string
-  buttonText2:
-    label:
-      en: Secondary button text
-      fr: Texte du bouton secondaire
-    type: string
-  buttonHref2:
-    label:
-      en: Secondary button URL
-      fr: Lien du bouton secondaire
-    type: string
   imageOne:
     label:
       en: Alignment of the first image
