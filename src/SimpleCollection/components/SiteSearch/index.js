@@ -1,5 +1,4 @@
 import React, {
-	Fragment,
 	useState,
 	useEffect,
 	useRef,
@@ -7,8 +6,6 @@ import React, {
 } from "react";
 import { Transition, Dialog, DialogPanel } from "@headlessui/react";
 import ResultItem from "./ResultItem";
-import { MdClose } from "react-icons/md";
-import { HiSearch } from "react-icons/hi";
 import FlexSearch from "flexsearch";
 
 function SearchIcon(props) {
@@ -42,61 +39,54 @@ const SearchBox = (props) => {
 	};
 
 	const placeholder = website.localize({
-		en: "Search...",
-		fr: "Recherche...",
+		en: "Find something...",
+		fr: "Trouvez quelque chose...",
 	});
 
 	return (
-		<div
-			className={`relative mx-auto text-gray-600 w-full flex items-center max-w-3xl md:px-4`}
-		>
-			<div
-				className={`bg-white rounded-lg !shadow-md overflow-hidden flex-auto flex items-center`}
-			>
-				<input
-					className={`w-full flex-auto appearance-none bg-transparent pl-4 pr-8 py-4 text-gray-600 text-base sm:text-sm placeholder-gray-500 focus:outline-none`}
-					placeholder={placeholder}
-					value={input}
-					ref={box}
-					onChange={(e) => {
-						setInput(e.target.value);
-					}}
-					onKeyDown={(e) => {
-						if (e.key === "Enter") {
-							handleSearch(e.target.value);
-						}
-					}}
-				/>
-				<div
-					className={`p-4 cursor-pointer group`}
-					onClick={() => {
-						handleSearch();
-					}}
-				>
-					<HiSearch
-						className={`cursor-pointer w-5 h-5 text-gray-600 group-hover:text-gray-900`}
-					/>
-				</div>
-			</div>
+		<div className="group relative flex h-12">
+			<SearchIcon
+				onClick={() => {
+					handleSearch(input);
+				}}
+				className="cursor-pointer absolute left-4 top-0 h-full w-5 fill-slate-400 dark:fill-slate-500"
+			/>
+			<input
+				className={`flex-auto appearance-none bg-transparent pl-12 text-slate-900 outline-none placeholder:text-slate-400 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden pr-4`}
+				placeholder={placeholder}
+				value={input}
+				ref={box}
+				onChange={(e) => {
+					setInput(e.target.value);
+				}}
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+						handleSearch(e.target.value);
+					}
+				}}
+			/>
 		</div>
 	);
 };
 
 const SearchResult = React.memo((props) => {
-	const { result, website } = props;
+	const { input, result, website } = props;
+	const [fallback, setFallback] = useState(null);
+	useEffect(() => {
+		setFallback(
+			<p className="px-4 py-8 text-center text-sm text-slate-700 dark:text-slate-400">
+				No results for &ldquo;
+				<span className="break-words text-slate-900 dark:text-white">
+					{input}
+				</span>
+				&rdquo;
+			</p>
+		);
+	}, [result]);
 
-	const fallback = (
-		<div
-			className={`flex flex-col mt-2 pt-4 md:mt-3 md:pt-3 md:px-4 max-w-3xl mx-auto`}
-		>
-			<span className={`text-white mb-4`}>
-				{website.localize({
-					en: "No search result.",
-					fr: "Aucun résultat de recherche.",
-				})}
-			</span>
-		</div>
-	);
+	useEffect(() => {
+		if (input === "") setFallback(null);
+	}, [input]);
 
 	let total = 0,
 		hits = [];
@@ -114,25 +104,13 @@ const SearchResult = React.memo((props) => {
 	}
 
 	return (
-		<div className={`flex flex-col mx-auto max-w-3xl w-full mt-5 md:px-4`}>
-			<span className={`text-white mb-4 text-sm`}>
-				{website.localize({
-					en: `${total} search results.`,
-					fr: `${total} Résultats de recherche.`,
-				})}
-			</span>
-			<div
-				className={`bg-white relative rounded-lg [overflow:overlay] max-h-[calc(100vh-240px)]`}
-			>
-                <ul>
-				{hits.length
-					? hits.map((item, i) => {
-                        return <ResultItem key={i} website={website} {...item?.doc} />;
-                    })
-					: null}
-                    </ul>
-			</div>
-		</div>
+		<ul>
+			{hits.length
+				? hits.map((item, i) => {
+						return <ResultItem key={i} website={website} {...item?.doc} />;
+				  })
+				: null}
+		</ul>
 	);
 });
 
@@ -141,18 +119,18 @@ const SearchKit = (props) => {
 	const [input, setInput] = useState("");
 
 	return (
-		<main className={`w-screen max-w-full h-screen p-5`}>
-			<div className={`pt-11 mx-auto max-w-6xl`}>
-				<SearchBox
-					{...props}
-					result={result}
-					setResult={setResult}
-					input={input}
-					setInput={setInput}
-				/>
-				<SearchResult {...{ result, ...props }} />
+		<>
+			<SearchBox
+				{...props}
+				result={result}
+				setResult={setResult}
+				input={input}
+				setInput={setInput}
+			/>
+			<div className="border-t border-slate-200 bg-white px-2 py-3 empty:hidden dark:border-slate-400/10 dark:bg-slate-800">
+				<SearchResult {...{ input, result, ...props }} />
 			</div>
-		</main>
+		</>
 	);
 };
 
@@ -300,6 +278,7 @@ const Search = (props) => {
 	);
 
 	const processResults = (text, documents) => {
+		if (documents[0] == null) return documents;
 		return [
 			{
 				...documents[0],
@@ -413,13 +392,26 @@ const Search = (props) => {
 					</kbd>
 				)}
 			</button>
-			<Transition appear show={isOpen} as={Fragment}>
-				<Dialog
-					as="div"
-					className={`relative inset-0 z-50`}
-					onClose={closeModal}
-				>
-					<Transition.Child
+			<Dialog
+				open={isOpen}
+				as="div"
+				className={`relative inset-0 z-50`}
+				onClose={closeModal}
+			>
+				<div className="fixed inset-0 bg-slate-900/50 backdrop-blur" />
+				<div className="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
+					<Dialog.Panel className="mx-auto transform-gpu overflow-hidden rounded-xl bg-white shadow-xl sm:max-w-xl dark:bg-slate-800 dark:ring-1 dark:ring-slate-700">
+						<div
+							aria-expanded={false}
+							aria-haspopup="listbox"
+							role="combobox"
+							/* aria-labelledby */
+						>
+							<SearchKit website={website} searchFn={query} />
+						</div>
+					</Dialog.Panel>
+				</div>
+				{/* <Transition.Child
 						as={Fragment}
 						enter={`ease-out duration-300`}
 						enterFrom={`opacity-0`}
@@ -454,9 +446,8 @@ const Search = (props) => {
 								</Dialog.Panel>
 							</Transition.Child>
 						</div>
-					</div>
-				</Dialog>
-			</Transition>
+					</div> */}
+			</Dialog>
 		</>
 	);
 };
