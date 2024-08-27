@@ -133,7 +133,7 @@ const SearchResult = React.memo((props) => {
 			onKeyDown={handleKeyDown}
 			role="listbox"
 			tabIndex={0}
-			className="focus:outline-none"
+			className="max-h-80 overflow-y-auto focus:outline-none"
 		>
 			{hits.map((item, i) => {
 				return (
