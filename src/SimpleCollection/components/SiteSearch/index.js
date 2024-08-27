@@ -1,10 +1,6 @@
-import React, {
-	useState,
-	useEffect,
-	useRef,
-	useCallback,
-} from "react";
-import { Transition, Dialog, DialogPanel } from "@headlessui/react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { Dialog } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 import ResultItem from "./ResultItem";
 import FlexSearch from "flexsearch";
 
@@ -17,26 +13,13 @@ function SearchIcon(props) {
 }
 
 const SearchBox = (props) => {
-	const { setResult, input, setInput, searchFn, website } = props;
-
-	const box = useRef(null);
+	const { input, setInput, website, handleKeyDown, box } = props;
 
 	useEffect(() => {
-		if (box) {
+		if (box.current) {
 			box.current.focus();
 		}
-	}, [box]);
-
-	const handleSearch = (searchText) => {
-		const result = searchFn(searchText);
-		if (result instanceof Promise) {
-			result.then((data) => {
-				setResult(data);
-			});
-		} else {
-			setResult(result);
-		}
-	};
+	}, []);
 
 	const placeholder = website.localize({
 		en: "Find something...",
@@ -59,57 +42,110 @@ const SearchBox = (props) => {
 				onChange={(e) => {
 					setInput(e.target.value);
 				}}
-				onKeyDown={(e) => {
-					if (e.key === "Enter") {
-						handleSearch(e.target.value);
-					}
-				}}
+				onKeyDown={handleKeyDown}
 			/>
 		</div>
 	);
 };
 
 const SearchResult = React.memo((props) => {
-	const { input, result, website } = props;
+	const { input, result, website, setResult, searchFn, box } = props;
 	const [fallback, setFallback] = useState(null);
-	useEffect(() => {
-		setFallback(
-			<p className="px-4 py-8 text-center text-sm text-slate-700 dark:text-slate-400">
-				No results for &ldquo;
-				<span className="break-words text-slate-900 dark:text-white">
-					{input}
-				</span>
-				&rdquo;
-			</p>
-		);
-	}, [result]);
+	const [ariaSelected, setAriaSelected] = useState(0);
+	const navigate = useNavigate();
+
+	const listRef = useRef(null);
+
+	const switchAriaSelected = (index) => () => {
+		setAriaSelected(index);
+	};
 
 	useEffect(() => {
-		if (input === "") setFallback(null);
+		const timer = setTimeout(() => {
+			setAriaSelected(null);
+
+			const result = searchFn(input);
+			if (result instanceof Promise) {
+				result.then((data) => {
+					setResult(data);
+				});
+			} else {
+				setResult(result);
+			}
+
+			if (input === "") {
+				setFallback(null);
+			} else {
+				setFallback(
+					<p className="px-4 py-8 text-center text-sm text-slate-700 dark:text-slate-400">
+						No results for &ldquo;
+						<span className="break-words text-slate-900 dark:text-white">
+							{input}
+						</span>
+						&rdquo;
+					</p>
+				);
+			}
+		}, 250);
+
+		return () => clearTimeout(timer);
 	}, [input]);
 
-	let total = 0,
-		hits = [];
+	const hits = result?.[0]?.result;
 
 	if (result) {
 		if (!result.length) return fallback;
 
-		hits = result?.[0]?.result;
-
-		total = hits.length;
-
-		if (!total) return fallback;
+		if (!hits.length) return fallback;
 	} else {
 		return null;
 	}
 
+	const handleKeyDown = (e) => {
+		if (ariaSelected === null && hits.length > 0) {
+			setAriaSelected(0);
+		} else if (e.key === "ArrowDown") {
+			setAriaSelected((prevIndex) =>
+				prevIndex === hits.length - 1 ? 0 : prevIndex + 1
+			);
+			listRef.current.focus();
+		} else if (e.key === "ArrowUp") {
+			setAriaSelected((prevIndex) =>
+				prevIndex === 0 ? hits.length - 1 : prevIndex - 1
+			);
+		} else if (e.key === "Enter") {
+			const selectedItem = listRef.current.querySelector(
+				`[aria-selected="true"]`
+			);
+			const route = selectedItem?.getAttribute("data-route");
+
+			if (route) {
+				navigate(route);
+			}
+		} else {
+			box.current.focus();
+		}
+	};
+
 	return (
-		<ul>
-			{hits.length
-				? hits.map((item, i) => {
-						return <ResultItem key={i} website={website} {...item?.doc} />;
-				  })
-				: null}
+		<ul
+			ref={listRef}
+			onKeyDown={handleKeyDown}
+			role="listbox"
+			tabIndex={0}
+			className="focus:outline-none"
+		>
+			{hits.map((item, i) => {
+				return (
+					<ResultItem
+						key={i}
+						website={website}
+						aria-selected={ariaSelected === i ? "true" : "false"}
+						onMouseEnter={switchAriaSelected(i)}
+						{...item?.doc}
+					/>
+				);
+			})}
 		</ul>
 	);
 });
@@ -117,6 +153,14 @@ const SearchResult = React.memo((props) => {
 const SearchKit = (props) => {
 	const [result, setResult] = useState(null);
 	const [input, setInput] = useState("");
+	const box = useRef(null);
+
+	const handleKeyDown = (e) => {
+		if (e.key === "ArrowDown" && result && result.length) {
+			e.preventDefault(); // Prevent default scrolling behavior
+			document.querySelector("[role='listbox']").focus();
+		}
+	};
 
 	return (
 		<>
@@ -126,9 +170,11 @@ const SearchKit = (props) => {
 				setResult={setResult}
 				input={input}
 				setInput={setInput}
+				handleKeyDown={handleKeyDown}
+				box={box}
 			/>
 			<div className="border-t border-slate-200 bg-white px-2 py-3 empty:hidden dark:border-slate-400/10 dark:bg-slate-800">
-				<SearchResult {...{ input, result, ...props }} />
+				<SearchResult {...{ input, result, setResult, box, ...props }} />
 			</div>
 		</>
 	);
