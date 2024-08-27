@@ -64,8 +64,6 @@ const ResultItem = (props) => {
 
 	const navigate = useNavigate();
 
-	// console.log(props);
-
 	const imgType = banner ? "banner" : avatar ? "avatar" : "";
 	const version = banner || avatar || "";
 
