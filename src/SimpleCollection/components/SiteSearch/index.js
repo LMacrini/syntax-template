@@ -210,8 +210,6 @@ const Search = (props) => {
 	let [modifierKey, setModifierKey] = useState();
 	let { buttonProps, dialogProps } = useSearchProps();
 
-	// const searchData = website.getSearchData();
-
 	let [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
@@ -234,23 +232,6 @@ const Search = (props) => {
 	const path = location.pathname;
 
 	const [searcher, setSearcher] = useState(null);
-
-	// const query = useCallback(
-	//     (text) => {
-	//         if (!searcher) return null;
-
-	//         if (website) {
-	//             website.submitEvent('search', {
-	//                 search_term: text,
-	//             });
-	//         }
-
-	//         return searcher.search(text, {
-	//             enrich: true,
-	//         });
-	//     },
-	//     [searcher]
-	// );
 
 	const query = useCallback(
 		(text) => {
@@ -349,45 +330,6 @@ const Search = (props) => {
 		];
 	};
 
-	// useEffect(() => {
-	//     if (searchData) {
-	//         const index = new FlexSearch.Document({
-	//             document: {
-	//                 id: 'href',
-	//                 index: ['content'],
-	//                 store: [
-	//                     'href',
-	//                     'title',
-	//                     'description',
-	//                     'route',
-	//                     'contentType',
-	//                     'viewType',
-	//                     'contentId',
-	//                     'banner',
-	//                     'avatar',
-	//                 ],
-	//             },
-	//             cache: true,
-	//             tokenize: 'forward',
-	//         });
-
-	//         const add = (sequential_data) => {
-	//             for (let x = 0, data; x < sequential_data.length; x++) {
-	//                 data = sequential_data[x];
-
-	//                 index.add({
-	//                     ...data,
-	//                     content: `${data.title} ${data.description} ${data.content}`,
-	//                 });
-	//             }
-	//         };
-
-	//         add(searchData);
-
-	//         setSearcher(index);
-	//     }
-	// }, [searchData]);
-
 	useEffect(() => {
 		if (isOpen) {
 			return;
@@ -415,12 +357,6 @@ const Search = (props) => {
 
 	return (
 		<>
-			{/* <div className={`rounded-lg flex items-center justify-${iconPosition}`} onClick={openModal}>
-                <HiSearch
-                    className={`cursor-pointer w-6 h-6 text-gray-600 hover:text-gray-800 ${props.iconClassName}`}
-                    style={props.iconStyle}
-                />
-            </div> */}
 			<button
 				type="button"
 				className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 lg:w-96 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500"
@@ -457,42 +393,6 @@ const Search = (props) => {
 						</div>
 					</Dialog.Panel>
 				</div>
-				{/* <Transition.Child
-						as={Fragment}
-						enter={`ease-out duration-300`}
-						enterFrom={`opacity-0`}
-						enterTo={`opacity-100`}
-						leave={`ease-in duration-200`}
-						leaveFrom={`opacity-100`}
-						leaveTo={`opacity-0`}
-					>
-						<div
-							onClick={closeModal}
-							className={`fixed inset-0 bg-gray-900 bg-opacity-60 transition-opacity`}
-							aria-hidden="true"
-						></div>
-					</Transition.Child>
-					<div className="fixed inset-0 overflow-y-auto">
-						<div className={`min-h-screen px-4 flex justify-center`}>
-							<MdClose
-								className={`w-10 h-10 text-gray-200 hover:text-white cursor-pointer absolute top-4 right-6 z-[51]`}
-								onClick={closeModal}
-							></MdClose>
-							<Transition.Child
-								as="div"
-								enter={`ease-out duration-300`}
-								enterFrom={`opacity-0 scale-95`}
-								enterTo={`opacity-100 scale-100`}
-								leave={`ease-in duration-200`}
-								leaveFrom={`opacity-100 scale-100`}
-								leaveTo={`opacity-0 scale-95`}
-							>
-								<Dialog.Panel>
-									<SearchKit website={website} searchFn={query}></SearchKit>
-								</Dialog.Panel>
-							</Transition.Child>
-						</div>
-					</div> */}
 			</Dialog>
 		</>
 	);
