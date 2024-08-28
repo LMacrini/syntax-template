@@ -57,7 +57,7 @@ const Render = function (props) {
 						{content.map((item, i) => {
 							return (
 								<li key={i}>
-									<Render content={item} />
+									<Render {...props} content={item} />
 								</li>
 							);
 						})}
@@ -69,7 +69,7 @@ const Render = function (props) {
 						{content.map((item, i) => {
 							return (
 								<li key={i}>
-									<Render content={item} />
+									<Render {...props} content={item} />
 								</li>
 							);
 						})}
@@ -78,7 +78,7 @@ const Render = function (props) {
 			case "blockquote":
 				return (
 					<blockquote key={index} className={styles.Block}>
-						<Render content={content} />
+						<Render {...props} content={content} />
 					</blockquote>
 				);
 
